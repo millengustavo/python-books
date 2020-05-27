@@ -70,3 +70,29 @@ The order of evaluation for Python statements is both **left to right and opport
 `py-spy`: sampling profiler, don't require any code changes -> it introspects an already-running Python process and reports in the console with a *top-like* display
 
 # Ch3. Lists and Tuples
+- **Lists**: dynamic arrays; mutable and allow for resizing
+- **Tuples**: static arrays; immutable and the data within them cannot be changed aftey they have been created
+- Tuples are cached by the Python runtime which means that we don't need to talk to the kernel to reserve memory every time we want to use one
+
+Python lists have a built-in sorting algorithm that uses Tim sort -> O(n) in the best case and O(nlogn) in the worst case
+
+Once sorted, we can find our desired element using a binary search -> average case of complexity of O(logn)
+
+Dictionary lookup takes only O(1), but:
+- converting the data to a dictionary takes O(n)
+- no repeating keys may be undesirable
+
+`bisect` module: provide alternative functions, heavily optimized
+
+> "**Pick the right data structure and stick with it!** Although there may be more efficient data structures for particular operations, the cost of converting to those data structures may negate any efficiency boost"
+
+- Tuples are for describing multiple properties of one unchanging thing
+- List can be used to store collections of data about completely disparate objects
+- Both can take mixed types
+
+> "Generic code will be much slower than code specifically designed to solve a particular problem"
+
+- Tuple (immutable): lightweight data structure
+- List (mutable): extra memory needed to store them and extra computations needed when using them
+
+# Ch4. Dictionaries and Sets
