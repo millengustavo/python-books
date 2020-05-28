@@ -96,3 +96,33 @@ Dictionary lookup takes only O(1), but:
 - List (mutable): extra memory needed to store them and extra computations needed when using them
 
 # Ch4. Dictionaries and Sets
+Ideal data structures to use when your data has no intrinsic order (except for insertion order), but does have a unique object that can be used to reference it
+- *key*: reference object
+- *value*: data
+
+Sets do not actually contain values: is a collection of unique keys -> useful for doing set operations
+
+**hashable** type: implements `__hash__` and either `__eq__` or `__cmp__`
+
+## Complexity and speed
+- O(1) lookups based on the arbitrary index
+- O(1) insertion time
+- Larger footprint in memory
+- Actual speed depends on the hashing function
+
+## How do dictionaries and sets work?
+Use *hash tables* to achieve O(1) lookups and insertions -> clever usage of a hash function to turn an arbitrary key (i.e., a string or object) into an index for a list
+
+> *load factor*: how well distributed the data is throughout the hash table -> related to the entropy of the hash function
+
+Hash functions must return integers
+
+- Numerical types (`int` and `float`): hash is based on the bit value of the number they represent
+- Tuples and strings: hash value based on their contents
+- Lists: do not support hashing because their values can change
+
+> A custom-selected hash function should be careful to evenly distribute hash values in order to avoid collisions (will degrade the performance of a hash table) -> constantly "probe" the other values -> worst case O(n) = searching through a list
+
+**Entropy**: "how well distributed my hash function is" -> max entropy = *ideal* hash function = minimal number of collisions
+
+# Ch5. Iterators and Generators
