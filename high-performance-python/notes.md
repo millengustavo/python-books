@@ -126,3 +126,39 @@ Hash functions must return integers
 **Entropy**: "how well distributed my hash function is" -> max entropy = *ideal* hash function = minimal number of collisions
 
 # Ch5. Iterators and Generators
+
+## Python `for` loop deconstructed
+```python
+# The Python loop
+for i in object:
+    do_work(i)
+
+# Is equivalent to
+object_iterator = iter(object)
+while True:
+    try:
+        i = next(object_iterator)
+    except StopIteration:
+        break
+    else:
+        do_work(i)
+```
+
+- Changing to generators instead of precomputed arrays may require algorithmic changes (sometimes not so easy to understand)
+
+> "Many of Python’s built-in functions that operate on sequences are generators themselves. `range` returns a generator of values as opposed to the actual list of numbers within the specified range. Similarly, `map`, `zip`, `filter`, `reversed`, and `enumerate` all perform the calculation as needed and don’t store the full result"
+
+- Generators have less memory impact than list comprehension
+- Generators are really a way of organizing your code and having smarter loops
+
+## Lazy generator evaluation
+*Single pass* or *online* algorithms: at any point in our calculation with a generator, we have only the current value and cannot reference any other items in the sequence
+
+`itertools` from the standard library provides useful functions to make generators easier to use:
+- `islice`: slicing a potentially infinite generator
+- `chain`: chain together multiple generators
+- `takewhile`: adds a condition that will end a generator
+- `cycle`: makes a finite generator infinite by constantly repeating it
+
+# Ch6. Matrix and Vector Computation
+
