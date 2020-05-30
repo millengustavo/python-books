@@ -161,4 +161,35 @@ while True:
 - `cycle`: makes a finite generator infinite by constantly repeating it
 
 # Ch6. Matrix and Vector Computation
+> Understanding the motivation behind your code and the intricacies of the algorithm will give you deeper insight about possible methods of optimization
+
+## Memory fragmentation
+Python doesn't natively support vectorization
+- Python lists store pointers to the actual data -> good because it allows us to store whatever type of data inside a list, however when it comes to vector and matrix operations, this is a source of performance degradation
+- Python bytecode is not optimized for vectorization -> `for` loops cannot predict when using vectorization would be benefical
+
+*von Neumann bottleneck*: limited bandwidth between memory and CPU as a result of the tiered memory architecture that modern computers use
+
+`perf` Linux tool: insights into how the CPU is dealing with the program being run
+
+`array` object is less suitable for math and more suitable for storing fixed-type data more efficiently in memory
+
+## numpy
+`numpy` has all of the features we need—it stores data in contiguous chunks of memory and supports vectorized operations on its data. As a result, any arithmetic we do on `numpy` arrays happens in chunks without us having to explicitly loop over each element. Not only is it much easier to do matrix arithmetic this way, but it is also faster
+
+Vectorization from `numpy`: may run fewer instructions per cycle, but each instruction does much more work
+
+## numexpr: making in-place operations faster and easier
+- `numpy`'s optimization of vector operations: occurs on only one operation at a time
+- `numexpr` is a module that can take an entire vector expression and compile it into very efficient code that is optimized to minimize cache misses and temporary space used. Expressions can utilize multiple CPU cores
+- Easy to change code to use `numexpr`: rewrite the expressions as strings with references to local variables
+
+## Lessons from matrix optimizations
+Always take care of any administrative things the code must do during initialization
+- allocating memory
+- reading a configuration from a file
+- precomputing values that will be needed throughout the lifetime of a program
+
+## Pandas
+
 
