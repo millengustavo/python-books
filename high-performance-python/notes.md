@@ -191,5 +191,40 @@ Always take care of any administrative things the code must do during initializa
 - precomputing values that will be needed throughout the lifetime of a program
 
 ## Pandas
+### Pandas's internal model
+- Operations on columns often generate temporary intermediate arrays which consume RAM: expect a temporary memory usage of up to 3-5x your current usage
+- Operations can be single-threaded and limited by Python's global interpreter lock (GIL)
+- Columns of the same `dtype` are grouped together by a `BlockManager` -> make row-wise operations on columns of the same datatype faster
+- Operations on data of a single common block -> *view*; different `dtypes` -> can cause a *copy* (slower)
+- Pandas uses a mix of NumPy datatypes and its own extension datatypes
+- numpy `int64` isn't NaN aware -> Pandas `Int64` uses two columns of data: integers and NaN bit mask
+- numpy `bool` isn't NaN aware -> Pandas `boolean`
+
+> More safety makes things run slower (checking passing appropriate data) -> **Developer time (and sanity) x Execution time**. Checks enabled: avoid painful debugging sessions, which kill developer productivity. If we know that our data is of the correct form for our chosen algorithm, these checks will add a penalty
+
+## Building DataFrames and Series from partial results rather than concatenating
+- Avoid repeated calls to `concat` in Pandas (and to the equivalent `concatenate` in NumPy)
+- Build lists of intermediate results and then construct a Series or DataFrame from this list, rather than concatenating to an existing object
+
+## Advice for effective pandas development
+- Install the optional dependencies `numexpr` and `bottleneck` for additional performance improvements
+- Caution against chaining too many rows of pandas operations in sequence: difficult to debug, chain only a couple of operations together to simplify your maintenance
+- **Filter your data before calculating** on the remaining rows rather than filtering after calculating
+- Check the schema of your DataFrames as they evolve -> tool like `bulwark`, you can visualize confirm that your expectations are being met
+- Large Series with low cardinality: `df['series_of_strings'].astype('category')` -> `value_counts` and `groupby` run faster and the Series consume less RAM
+- Convert 8-byte `float64` and `int64` to smaller datatypes -> 2-byte `float16` or 1-byte `int8` -> smaller range to further save RAM
+- Use the `del` keyword to delete earlier references and clear them from memory
+- Pandas `drop` method to delete unused columns
+- Persist the prepared DataFrame version to disk by using `to_pickle`
+- Avoid `inplace=True` -> are scheduled to be removed from the library over time
+- `Modin`, `cuDF`
+- `Vaex`: work on very large datasets that exceed RAM by using lazy evaluation while retaining a similar interface to Pandas -> large datasets and string-heavy operations
+
+# Ch7. Compiling to C
+
+
+
+
+  
 
 
