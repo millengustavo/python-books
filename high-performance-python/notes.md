@@ -221,7 +221,72 @@ Always take care of any administrative things the code must do during initializa
 - `Vaex`: work on very large datasets that exceed RAM by using lazy evaluation while retaining a similar interface to Pandas -> large datasets and string-heavy operations
 
 # Ch7. Compiling to C
+To make code run faster:
+- Make it do less work
+- Choose good algorithms
+- Reduce the amount of data you're processing
+- Execute fewer instructions -> compile your code down to machine code
 
+## Python offers
+- `Cython`: pure C-based compiling
+- `Numba`: LLVM-based compiling
+- `PyPy`: replacement virtual machine which includes a built-in just-in-time (JIT) compiler
+
+## What sort of speed gains are possible?
+Compiling generate more gains when the code:
+- is mathematical
+- has lots of loops that repeat the same operations many times
+
+Unlikely to show speed up:
+- calls to external libraries (regexp, string operations, calls to database)
+- programs that are I/O-bound
+
+## JIT versus AOT compilers
+- **AOT (ahead of time)**: `Cython` -> you'll have a library that can instantly be used -> best speedups, but requires the most manual effort
+- **JIT (just in time)**: `Numba`, `PyPy` -> you don't have to do much work up front, but you have a "cold start" problem -> impressive speedups with little manual intervention
+
+## Why does type information help the code run faster?
+Python is dynamically typed -> keeping the code generic makes it run more slowly
+
+> “Inside a section of code that is CPU-bound, it is often the case that the types of variables do not change. This gives us an opportunity for **static compilation and faster code execution**”
+
+## Using a C compiler
+`Cython` uses `gcc`: good choice for most platforms; well supported and quite advanced
+
+## Cython
+- Compiler that converts type-annotaded (C-like) Python into a compiled extension module
+- Wide used and mature
+- `OpenMP` support: possible to convert parallel problems into multiprocessing-aware modules
+- `pyximport`: simplified build system
+- Annotation option that output an HTML file -> more yellow = more calls into the Python virtual machine; more white = more non-Python C code
+
+Lines that cost the most CPU time:
+- inside tight inner loops
+- dereferencing `list`, `array` or `np.array` items
+- mathematical operations
+
+`cdef` keyword: declare variables inside the function body. These must be declared at the top of the function, as that’s a requirement from the C language specification
+
+> **Strength reduction**: writing equivalent but more specialized code to solve the same problem. Trade worse flexibility (and possibly worse readability) for faster execution
+
+`memoryview`: allows the same low-level access to any object that implements the buffer interface, including `numpy` arrays and Python arrays
+
+## Numba
+- JIT compiler that specializes in `numpy` code, which it compiles via LLVM compiler at runtime
+- You provide a decorator telling it which functions to focus on and then you let Numba take over
+- `numpy` arrays and nonvectorized code that iterates over many items: Numba should give you a quick and very painless win. 
+- Numba does not bind to external C libraries (which Cython can do), but it can automatically generate code for GPUs (which Cython cannot).
+- OpenMP parallelization support with `prange`
+- Break your code into small (<10 line) and discrete functions and tackle these one at a time
+
+```
+from numba import jit
+
+@jit()
+def my_fn():
+```
+
+## PyPy
 
 
 
