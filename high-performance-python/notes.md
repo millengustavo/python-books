@@ -287,6 +287,52 @@ def my_fn():
 ```
 
 ## PyPy
+- Alternative implementation of the Python language that includes a tracing just-in-time compiler
+- Offers a faster experience than CPython
+- Uses a different type of garbage collector (modified mark-and-sweep) than CPython (reference counting) = may clean up an unused object much later
+- PyPy can use a lot of RAM
+- `vmprof`: lightweight sampling profiler
+
+## When to use each technology
+![compiler_options](./compiler_options.png)
+
+- `Numba`: quick wins for little effort; young project
+- `Cython`: best results for the widest set of prolbmes; requires more effort; mix Python and C annotations
+- `PyPy`: strong option if you're not using `numpy` or other hard-to-port C extensions
+
+### Other upcoming projects
+- Pythran
+- Transonic
+- ShedSkin
+- PyCUDA
+- PyOpenCL
+- Nuitka
+
+## Graphics Processing Units (GPUs)
+Easy-to-use GPU mathematics libraries:
+- TensorFlow
+- PyTorch
+
+### Dynamic graphs: PyTorch
+Static computational graph tensor library that is particularly user-friendly and has a very intuitive API for anyone familiar with `numpy`
+
+> *Static computational graph*: performing operations on `PyTorch` objects creates a dynamic definition of a program that gets compiled to GPU code in the background when it is executed -> changes to the Python code automatically get reflected in changes in the GPU code without an explicit compilation step needed
+
+### Basic GPU profiling
+- `nvidia-smi`: inspect the resource utilization of the GPU
+- Power usage is a good proxy for judging how much of the GPU's compute power is being used -> more power the GPU is drawing = more compute it is currently doing
+
+### When to use GPUs
+- Task requires mainly linear algebra and matrix manipulations (multiplication, addition, Fourier transforms)
+- Particularly true if the calculation can happen on the GPU uninterrupted for a period of time before being copied back into system memory
+- GPU can run many more tasks at once than the CPU can, but each of those tasks run more slowly on the GPU than on the CPU
+- Not a good tool for tasks that require exceedingly large amounts of data, many conditional manipulations of the data, or changing data
+
+1. Ensure that the memory use of the problem will fit withing the GPU
+2. Evaluate whether the algorithm requires a lot of branching conditions versus vectorized operations
+3. Evaluate how much data needs to be moved between the GPU and the CPU
+
+# Ch8. Asynchronous I/O
 
 
 
