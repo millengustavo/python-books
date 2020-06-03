@@ -333,9 +333,42 @@ Static computational graph tensor library that is particularly user-friendly and
 3. Evaluate how much data needs to be moved between the GPU and the CPU
 
 # Ch8. Asynchronous I/O
+*I/O bound program*: the speed is bounded by the efficiency of the input/output
 
+Asynchronous I/O helps utilize the wasted *I/O wait* time by allowing us to perform other operations while we are in that state
 
+## Introduction to asynchronous programming
+- *Context switch*: when a program enters I/O wait, the execution is paused so that the kernel can perform the low-level operations associated with the I/O request
+- **Callback paradigm**: functions are called with an argument that is generally called the callback -> instead of the function returing its value, it call the callback function with the value instead -> long chains = "callback hell"
+- **Future paradigm**: an asynchronous function returns a `Future` object, which is a promise of a future result
+- `asyncio` standard library module and PEP 492 made the future's mechanism native to Python
 
+## How does async/await work?
+- `async` function (defined with `async def`) is called a *coroutine*
+- Coroutines are implemented with the same philosophies as generators
+- `await` is similar in function to a `yield` -> the execution of the current function gets paused while other code is run
+
+### Gevent
+- Patches the standard library with asynchronous I/O functions, 
+- Has a `Greenlets` object that can be used for concurrent execution
+- Ideal solution for mainly CPU-based problems that sometimes involve heavy I/O
+
+### tornado
+- Frequently used package for asynchronous I/O in Python
+- Originally developed by Facebook primarily for HTTP clients and servers
+- Ideal for any application that is mostly I/O-bound and where most of the application should be asynchronous
+- Performant web server
+
+### aiohttp
+- Built entirely on the `asyncio` library
+- Provides both HTTP client and server functionality
+- Uses a similar API to `tornado`
+  
+### Batched results
+- *Pipelining*: batching results -> can help lower the burden of an I/O task
+- Good compromise between the speeds of asynchronous I/O and the ease of writing serial programs
+
+# Ch9. The multiprocessing module
   
 
 
