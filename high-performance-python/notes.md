@@ -369,6 +369,44 @@ Asynchronous I/O helps utilize the wasted *I/O wait* time by allowing us to perf
 - Good compromise between the speeds of asynchronous I/O and the ease of writing serial programs
 
 # Ch9. The multiprocessing module
-  
+- Additional process = more communication overhead = decrease available RAM -> rarely get a full *n*-times speedup
+- If you run out of RAM and the system reverts to using the disk’s swap space, any parallelization advantage will be massively lost to the slow paging of RAM back and forth to disk
+- Using hyperthreads: CPython uses a lot of RAM -> hyperthreading is not cache friendly. Hyperthreads = added bonus and not a resource to be optimized against -> adding more CPUs is more economical than tuning your code
+- **Amdahl's law**: if only a small part of your code can be parallelized, it doesn't matter how many CPUs you throw at it; it still won't run much faster overall
+- `multiprocessing` module: process and thread-based parallel processing, share work over queues, and share data among processes -> focus: single-machine multicore parallelism
+- `multiprocessing`: higher level, sharing Python data structures
+- `OpenMP`: works with C primitive objects once you've compiled to C
 
+> Keep the parallelism as simple as possible so that your development velocity is kept high
 
+- *Embarrassingly parallel*: multiple Python processes all solving the same problem without communicating with one another -> not much penalty will be incurred as we add more and more Python processes
+
+Typical jobs for the `multiprocessing` module:
+- Parallelize a CPU-bound task with `Process` or `Pool` objects
+- Parallelize an I/O-bound task in a `Pool` with threads using the `dummy` module
+- Share pickled work via a `Queue`
+- Share state between parallelized workers, including bytes, primitive datatypes, dictionaries, and lists
+
+> `Joblib`: stronger cross-platform support than `multiprocessing`
+
+## Replacing multiprocessing with Joblib
+- `Joblib` is an improvement on `multiprocessing` 
+- Enables lightweight pipelining with a focus on:
+  - easy parallel computing 
+  - transparent disk-based caching of results 
+- It focuses on NumPy arrays for scientific computing
+- Quick wins:
+  - process a loop that could be embarrassingly parallel
+  - expensive functions that have no side effect
+  - able to share `numpy` data between processes
+- `Parallel` class: sets up the process pool
+- `delayed` decorator: wraps our target function so it can be applied to the instantiated `Parallel` object via an iterator
+
+### Intelligent caching of function call results
+`Memory` cache: decorator that caches functions results based on the input arguments to a disk cache
+
+### Using numpy
+- `numpy` is more cache friendly
+- `numpy` can achieve some level of additional speedup around threads by working outside the GIL
+
+## Asynchronous systems
