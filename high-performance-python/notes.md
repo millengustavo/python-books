@@ -410,3 +410,32 @@ Typical jobs for the `multiprocessing` module:
 - `numpy` can achieve some level of additional speedup around threads by working outside the GIL
 
 ## Asynchronous systems
+Require a special level of patience. Suggestions:
+- K.I.S.S.
+- Avoiding asynchronous self-contained systems if possible, as they will grow in complexity and quickly become hard to maintain
+- Using mature libraries like `gevent` that give you tried-and-tested approaches to dealing with certain problem sets
+
+## Interprocess Communication (IPC)
+- Cooperation cost can be high: synchronizing data and checking the shared data
+- Sharing state tends to make things complicated
+- IPC is fairly easy but generally comes with a cost
+
+### multiprocessing.Manager()
+- Lets us share higher-level Python objects between processes as managed shared objects; the lower-level objects are wrapped in proxy objects 
+- The wrapping and safety have a speed cost but also offer great flexibility. 
+- You can share both lower-level objects (e.g., integers and floats) and lists and dictionaries.
+
+### Redis
+- **Key/value in-memory storage engine**. It provides its own locking and each operation is atomic, so we don’t have to worry about using locks from inside Python (or from any other interfacing language).
+- Lets you share state not just with other Python processes but also other tools and other machines, and even to expose that state over a web-browser interface
+- Redis lets you store: Lists of strings; Sets of strings; Sorted sets of strings; Hashes of strings
+- Stores everything in RAM and snapshots to disk
+- Supports master/slave replication to a cluster of instances
+- Widely used in industry and is mature and well trusted
+
+## mmap
+- Memory-mapped (shared memory) solution
+- The bytes in a shared memory block are not synchronized and they come with very little overhead
+- Bytes act like a file -> block of memory with a file-like interface
+
+# Ch10. Clusters and Job Queues
