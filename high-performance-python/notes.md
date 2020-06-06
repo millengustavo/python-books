@@ -439,3 +439,60 @@ Require a special level of patience. Suggestions:
 - Bytes act like a file -> block of memory with a file-like interface
 
 # Ch10. Clusters and Job Queues
+*Cluster*: collection of computers working together to solve a common task
+
+Before moving to a clustered solution:
+- Profile your system to understand the bottlenecks
+- Exploit compile solutions (Numba, Cython)
+- Exploit multiple cores on a single machine (Joblib, multiprocessing)
+- Exploit techniques for using less RAM
+- Really need a lot of CPUs, high resiliency, rapid speed of response, ability to process data from disks in parallel
+
+## Benefits of clustering
+- Easily scale computing requirements
+- Improve reliability
+- Dynamic scaling
+
+## Drawbacks of clustering
+- Change in thinking
+- Latency between machines
+- Sysadmin problems: software versions between machines, are other machines working?
+- Moving parts that need to be in sync
+- "If you don't have a documented restart plan, you should assume you'll have to write one at the worst possible time"
+
+> Using a cloud-based cluster can mitigate a lot of these problems, and some cloud providers also offer a spot-priced market for cheap but temporary computing resources.
+
+- A system that's easy to debug *probably* beats having a faster system
+- Engineering time and the cost of downtime are *probably* your largest expenses
+
+## Parallel Pandas with Dask
+- Provide a suite of parallelization solutions that scales from a single core on a laptop to multicore machines to thousands of cores in a cluster.
+- "Apache Spark lite” 
+- For `Pandas` users: larger-than-RAM datasets and desire for multicore parallelization
+
+### Dask
+- *Bag*: enables parallelized computation on unstructured and semistructured data
+- *Array*: enables distributed and larger-than-RAM `numpy` operations
+- *Distributed DataFrame*: enables distributed and larger-than-RAM `Pandas` operations
+- *Delayed*: parallelize chains of arbitrary Python functions in a lazy fashion
+- *Futures*: interface that includes `Queue` and `Lock` to support task collaboration
+- *Dask-ML*: scikit-learn-like interface for scalable machine learning
+
+> You can use Dask (and Swifter) to parallelize any side-effect-free function that you’d usually use in an `apply` call
+
+- `npartitions` = # cores
+
+#### Swifter
+Builds on Dask to provide three parallelized options with very simple calls: `apply`, `resample` and `rolling`
+
+### Vaex
+- String-heavy DataFrames
+- Larger-than-RAM datasets
+- Subsets of a DataFrame -> Implicit lazy evaluation
+
+## NSQ for robust production clustering
+- Highly performant distributed messaging platform
+- *Queues*: type of buffer for messages
+- *Pub/subs*: describes who gets what messages (*publisher/subscriber*)
+
+# Ch11. Using less RAM
