@@ -496,3 +496,33 @@ Builds on Dask to provide three parallelized options with very simple calls: `ap
 - *Pub/subs*: describes who gets what messages (*publisher/subscriber*)
 
 # Ch11. Using less RAM
+- Counting the amount of RAM used by Python object is tricky -> if we ask the OS for a count of bytes used, it will tell us the total amount allocated to the process
+- Each unique object has a memory cost
+
+## Objects for primitives are expensive
+`memory_profiler`
+
+```
+%load_ext memory_profiler
+
+%memit <operation>
+```
+
+### The `array` module stores many primitive objects cheaply
+- Creates a contiguos block of RAM to hold the underlying data. Which data structures:
+  - integers, floats and characters
+  - *not* complex numbers or classes
+- Good to pass the array to an external process or use only some of the data (not to compute on them)
+- Using a regular `list` to store many numbers is much less efficient in RAM than using an `array` object
+- `numpy` arrays are almost certainly a better choice if you are doing anything heavily numeric:
+  - more datatype options
+  - many specialized and fast functions
+
+### Using less RAM in NumPy with NumExpr
+`NumExpr` is a tool that both speeds up and reduces the size of intermediate operations
+
+> Install the optional NumExpr when using Pandas (Pandas does not tell you if you haven’t installed NumExpr) -> calls to `eval` will run more quickly -> import numpexpr: if this fails, install it! 
+
+- NumExpr breaks the long vectors into shorter, cache-friendly chunks and processes each in series, so local chunks of results are calculated in a cache-friendly way
+
+## Bytes versus Unicode
