@@ -526,3 +526,46 @@ Builds on Dask to provide three parallelized options with very simple calls: `ap
 - NumExpr breaks the long vectors into shorter, cache-friendly chunks and processes each in series, so local chunks of results are calculated in a cache-friendly way
 
 ## Bytes versus Unicode
+- Python 3.x, all strings are Unicode by default, and if you want to deal in bytes, you'll explicitly create a `byte` sequence
+- **UTF-8 encoding** of a Unicode object uses 1 byte per ASCII character and more bytes for less frequently seen characters
+
+## More efficient tree structures to represent strings
+- **Tries**: share common prefixes
+- **DAWG**: share common prefixes and suffixes
+- Overlapping sequences in your strings -> you'll likely see a RAM improvement
+- Save RAM and time in exchange for a little additional effort in preparation
+- Unfamiliar data structures to many developers -> isolate in a module to simplify maintenance
+
+### Directed Acyclic Word Graph (DAWG)
+Attemps to efficiently represent strings that share common prefixes and suffixes
+
+### Marisa Trie
+*Static trie* using Cython bindings to an external library -> it cannot be modified after construction
+
+## Scikit-learn's DictVectorizer and FeatureHasher
+- `DictVectorizer`: takes a dictionary of terms and their frequences and converts them into a variable-width sparse matrix -> it is possible to revert the process
+- `FeatureHasher`: converts the same dictionary of terms and frequencies into a fixed-width sparse matrix -> it doesn't store a vocabulary and instead employs a hashing algorithm to assign token frequencies to columns -> can't convert it back to the original token from hash
+
+## ScyPy's Sparse Matrices
+- Matrix in which most matrix elements are 0
+- `C00` matrices: simplest implementation: each non-zero element we store the value in addition to the location of the value -> each non-zero value = 3 numbers stored -> used only to contruct sparse matrices and not for actual computation
+- `CSR/CSC` is preferred for computation
+
+> Push and pull of speedups with sparse arrays: balance between losing the use of efficient caching and vectorization versus not having to do a lot of the calculations associated with the zero values of the matrix
+
+Limitations:
+- Low amount of support
+- Multiple implementations with benefits and drawbacks
+- May require expert knowledge
+
+## Tips for using less RAM
+> "If you can avoid putting it into RAM, do. Everything you load costs you RAM"
+
+- Numeric data: switch to using `numpy` arrays
+- Very sparse arrays: SciPy's sparse array functionality
+- Strings: stick to `str` rather than `bytes`
+- Many Unicode objects in a static structure: DAWG and trie structures
+- Lots of bit strings: `numpy` and the `bitarray` package
+
+## Probabilistic Data Structures
+
