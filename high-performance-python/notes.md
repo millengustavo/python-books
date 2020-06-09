@@ -568,4 +568,25 @@ Limitations:
 - Lots of bit strings: `numpy` and the `bitarray` package
 
 ## Probabilistic Data Structures
+- Make trade-offs in accuracy for immense decrease in memory usage
+- The number of operations you can do on them is much more restricted
+
+> “Probabilistic data structures are fantastic when you have taken the time to understand the problem and need to put something into production that can answer a very small set of questions about a very large set of data”
+
+- "lossy compression": find an alternative representation for the data that is more compact and contains the relevant information for answering a certain set of questions
+
+### Morris counter
+Keeps track of an exponent and models the counted state as `2^exponent` -> provides an *order of magnitude* estimate
+
+### K-Minimum values
+If we keep the `k` smallest unique hash values we have seen, we can **approximate the overall spacing between hash values** and infer the total number of items
+- *idempotence*: if we do the same operation, with the same inputs, on the structure multiple times, the state will not be changed
+
+### Bloom filters
+- Answer the question of **whether we've seen an item before**
+- Work by having multiple hash values in order to represent a value as multiple integers. If we later see something with the same set of integers, we can be reasonably confident that it is the same value
+- **No false negatives and a controllable rate of false positives**
+- Set to have error rates below 0.5%
+
+# Ch12. Lessons from the field
 
