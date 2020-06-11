@@ -7,3 +7,5 @@
 - Fluent Python - Luciano Ramalho
 
 ![compiler_options](high-performance-python/compiler_options.png)
+
+![map_reduce](master-large-data-python/map_reduce.png)
