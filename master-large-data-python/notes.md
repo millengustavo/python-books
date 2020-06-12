@@ -64,3 +64,52 @@ Extension of parallel computing in which the computer resource we are dedicating
 - tackle large problems with parallel programming because we can procure as many resources as we need
 
 # Ch2. Accelerating large dataset work: Map and parallel computing
+`map`'s primary capabilities:
+- Replace `for` loops
+- Transform data
+- `map` evaluates only when necessary, not when called -> generic `map` object as output
+
+`map` makes easy to parallel code -> break into pieces
+
+## Pattern
+- Take a sequence of data
+- Transform it with a function
+- Get the outputs
+
+> `Generators` instead of normal loops prevents storing all objects in memory in advance
+
+## Lazy functions for large datasets
+- `map` = lazy function = it doesn't evaluate when we call `map`
+- Python stores the instructions for evaluating the function and runs them at the exact moment we ask for the value
+- Common lazy objects in Python = `range` function
+- Lazy `map` allows us to transform a lot of data without an unnecessarily large amount of memory or spending the time to generate it
+
+## Parallel processing
+### Problems
+#### Inability to pickle data or functions 
+- *Pickling*: Python's version of object serialization or mashalling
+- Storing objects from our code in an efficient binary format on the disk that can be read back by our program at a later time (`pickle` module) 
+- allows us to share data across procesors or even machines, saving the instructions and data and then executing them elsewhere
+- Objects we can't pickle: lambda functions, nested functions, nested classes
+- `pathos` and `dill` module allows us to pickle almost anything
+
+#### Order-sensitive operations
+- Work in parallel: not guaranteed that tasks will be finished in the same order they're input
+- If work needs to be processed in a linear order -> probably shouldn't do it in parallel
+- Even though Python may not complete the problems in order, it still remembers the order in which it was supposed to do them -> `map` returns in the exact order we would expect, even if it doesn't process in that order
+
+#### State-dependent operations
+- Common solution for the state problem: **take the internal state and make it an external variable**
+
+## Other observations
+- Best way to flatten a list into one big list -> Python's itertools `chain` function: takes an iterable of iterables and chains them together so they can all be accessed one after another -> lazy by default
+- Best way to visualize graphs is to take it out of Python and import it into Gephi: dedicated piece of graph visualization software
+
+> Anytime we're converting a sequence of some type into a sequence of another type, what we're doing can be expressed as a map -> N-to-N transformation: we're converting N data elements, into N data elements but in different format
+
+- To make this type of problem parallel only adds up to few lines of code:
+  - one import
+  - wrangling our processors with `Pool()`
+  - modifying our `map` statements to use `Pool.map` method
+
+# Ch3. Function pipelines for mapping complex transformations
