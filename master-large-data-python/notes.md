@@ -113,3 +113,47 @@ Extension of parallel computing in which the computer resource we are dedicating
   - modifying our `map` statements to use `Pool.map` method
 
 # Ch3. Function pipelines for mapping complex transformations
+
+## Helper functions and function chains
+**Helper functions**: small, simple functions that we rely on to do complex things -> break down large problems into small pieces that we can code quickly
+
+**Function chains** or **pipelines**: the way we put helper functions to work
+
+### Creating a pipeline
+- Chaining helper functions together
+- Ways to do this:
+  - Using a sequence of maps
+  - Chaining functions together with `compose`
+  - Creating a function pipeline with `pipe`
+- `compose` and `pipe` are functions in the `toolz` package
+
+#### Compose
+```
+from toolz.functoolz import compose
+```
+
+- Pass `compose` all the functions we want to include in our pipeline
+- Pass in **reverse order** because `compose` is going to apply them backwards
+- Store the output of our `compose` function, which is itself a function, to a variable
+- Call that variable or pass it along to `map`
+
+#### Pipe
+```
+from toolz.functoolz import pipe
+```
+
+- `pipe` function will pass a value through a pipeline
+- `pipe` expects the functions to be in the order we want to apply them
+- `pipe` evaluates each of the functions and returns a results
+- If we want to pass it to `map`, we have to wrap it in a function definition
+
+## Summary
+> Major advantages of creating pipelines of helper functions are that the code becomes: **Readable and clear; Modular and easy to edit**
+
+- Modular code play very nice with `map` and can readily move into parallel workflows, such as by using the `Pool()`
+- We can simplify working with nested data structures by using nested function pipelines, which we can apply with `map`
+
+# Ch4. Processing large datasets with lazy workflows
+
+
+
