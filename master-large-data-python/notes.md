@@ -154,6 +154,61 @@ from toolz.functoolz import pipe
 - We can simplify working with nested data structures by using nested function pipelines, which we can apply with `map`
 
 # Ch4. Processing large datasets with lazy workflows
+## Laziness
+- *Lazy evaluation*: strategy when deciding when to perform computations
+- Under lazy evaluation, the Python interpreter executes lazy Python code only when the program needs the results of that code
+- Opposite of *eager evaluation*, where everything is evaluated when it's called
 
+### Shrinking sequences with the filter function
+- `filter`: function for pruning sequences. 
+- Takes a sequence and restricts it to only the elements that meet a given condition
+- Related functions to know
+  - `itertools.filterfalse`: get all the results that make a qualifier function return `False`
+  - `toolz.dicttoolz.keyfilter`: filter on the keys of a `dict`
+  - `toolz.dicttoolz.valfilter`: filter on the values of a `dict`
+  - `toolz.dicttoolz.itemfilter`: filter on both the keys and the values of a dict
 
+### Combining sequences with zip
+- `zip`: function for merging sequences. 
+- Takes two sequences and returns a single sequence of `tuples`, each of which contains an element from each of the original sequences
+- Behaves like a zipper, it interlocks the values of Python iterables
 
+### Lazy file searching with iglob
+- `iglob`: function for lazily reading from the filesystem. 
+- Lazy way of querying our filesystem
+- Find a sequence of files on our filesystem that match a given pattern
+
+```
+from glob import iglob
+posts = iglob("path/to/posts/2020/06/*.md")
+```
+
+## Understanding iterators: the magic behind lazy Python
+- Replace data with instructions about where to find data and replace transformations with instructions for how to execute those transformations. 
+- The computer only has to concern itself with the data it is processing right now, as opposed to the data it just processed or has to process in the future
+- Iterators are the base class of all the Python data types that can be iterated over
+
+> The iteration process is defined by a special method called `.__iter__()`. If a class has this method and returns an object with a `.__next__()` method, then we can iterate over it.
+
+- One-way streets: once we call `next`, the item returned is removed from the sequence. We can never back up or retrieve that item again
+- Not meant for by-hand inspection -> meant for processing big data
+
+## Generators: functions for creating data
+- Class of functions in Python that lazily produce values in a sequence
+- We can create generators with functions using `yield` statements or through concise and powerful list comprehension-like generator expressions
+- They're a simple way of implementing an iterator
+- Primary advantage of generators and lazy functions: **avoiding storing more in memory than we need to**
+- `itertools.islice`: take chunks from a sequence
+
+> Lazy functions are great at processing data, but hardware still limits how quickly we can work through it
+
+- `toolz.frequencies`: takes a sequence in and returns a `dict` of items that occurred in the sequence as keys with corresponding values equal to the number of times they occurred -> provides the frequencies of items in our sequence
+
+## Simulations
+- For simulations -> writing classes allow us to consolidate the data about each piece of the simulation
+- `itertools.count()`: returns a generator that produces an infinite sequence of increasing numbers
+- Unzipping = the opposite of zipping -> takes a single sequence and returns two -> unzip = `zip(*my_sequence)`
+
+> `operator.methodcaller`: takes a string and returns a function that calls that method with the name of that string on any object passed to it -> call class methods using functions is helpful = allows us to use functions like `map` and `filter` on them
+
+# Ch5. Accumulation operations with reduce
