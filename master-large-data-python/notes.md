@@ -212,3 +212,52 @@ posts = iglob("path/to/posts/2020/06/*.md")
 > `operator.methodcaller`: takes a string and returns a function that calls that method with the name of that string on any object passed to it -> call class methods using functions is helpful = allows us to use functions like `map` and `filter` on them
 
 # Ch5. Accumulation operations with reduce
+- `reduce`: function for N-to-X transformations
+- We have a sequence and want to transform it into something that we can't use `map` for
+- `map` can take care of the transformations in a very concise manner, whereas `reduce` can take care of the very final transformation
+
+## Three parts of reduce
+- **Accumulator function**
+- **Sequence**: object that we can iterate through, such as lists, strings, and generators
+- **Initializer**: initial value to be passed to our accumulator (may be *optional*) -> use an initalizer not when we want to change the value of our data, but when we want to change the *type* of the data
+
+```
+from functools import reduce
+
+reduce(acc_fn, sequence, initializer)
+```
+
+### Accumulator functions
+- Does the heavy lifting for `reduce`
+- Special type of helper function
+- Common prototype:
+  - take an accumulated value and the next element in the sequence
+  - return another object, typically of the same type as the accumulated value
+  - **accumulator functions always needs to return a value**
+- Accumulator functions take two variables: one for the accumulated data (often designated as acc, left, or a), and one for the next element in the sequence (designated nxt, right, or b).
+
+```
+def my_add(acc, nxt):
+    return acc + nxt
+
+# or, using lambda functions
+lambda acc, nxt: acc + nxt
+```
+
+## Reductions
+- `filter`
+- `frequencies`
+
+## Using map and reduce together
+> If you can decompose a problem into an N-to-X transformation, all that stands between you and a reduction that solves that problem is a well-crafted accumulation function
+
+- Using `map` and `reduce` pattern to decouple the transformation logic from the actual transformation itself:
+  - leads to highly reusable code
+  - with large datasets -> simple functions becomes paramount -> we may have to wait a long time to discover we made a small error
+
+## Speeding up map and reduce
+> Using a parallel map can counterintuitively be slower than using a lazy map in map an reduce scenarios
+
+- We can always use parallelization at the `reduce` level instead of at the `map` level
+
+# Ch6. Speeding up map and reduce with advanced parallelization
