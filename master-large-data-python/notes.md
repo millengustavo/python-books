@@ -261,3 +261,56 @@ lambda acc, nxt: acc + nxt
 - We can always use parallelization at the `reduce` level instead of at the `map` level
 
 # Ch6. Speeding up map and reduce with advanced parallelization
+- Parallel `reduce`: use parallelization in the accumulation process instead of the transformation process
+
+## Getting the most out of parallel map
+Parallel `map` will be slower than lazy `map` when:
+- we're going to iterate through the sequence a second time later in our workflow
+- size of the work done in each parallel instance is small compared to the overhead that parallelization imposes -> *chunksize*: size of the different pieces into which we break our tasks for parallel processing
+- Python makes *chunksize* available as an option -> vary according to the task at hand
+
+### More parallel maps: `.imap` and `starmap`
+#### `.imap`
+- `.imap`: for lazy parallel mapping
+- use `.imap` method to work in parallel on very large sequences efficiently
+- Lazy and parallel? use the `.imap` and `.imap_unordered` methods of `Pool()` -> both methods return iterators instead of lists
+- `.imap_unordered`: behaves the same, except it doesn't necessarily put the sequence in the right order for our iterator
+
+#### `starmap`
+- use `starmap` to work with complex iterables, especially those we're likely to create using the `zip` function -> more than one single parameter (map's limitation)
+- `starmap` unpacks `tuples` as **positional parameters** to the function with which we're mapping
+- `itertools.starmap`: lazy function
+- `Pool().starmap`: parallel function
+
+## Parallel reduce for faster reductions
+Parallel `reduce`:
+- break a problem into chunks
+- make no guarantees about order
+- need to pickle data
+- be finicky about stateful objects
+- run slower than its linear counterpart on small datasets
+- run faster than its linear counterpart on big datasets
+- require an accumulator function, some data, and an initial value
+- perform N-to-X transformations
+
+> Parallel reduce has six parameters: an accumulation function, a sequence, an initializer value, a map, a chunksize, and a combination function - three more than the standard reduce function
+
+Parallel `reduce` workflow:
+- break our problem into pieces
+- do some work
+- combine the work
+- return a result
+
+> With parallel `reduce` we trade the simplicity of always having the same combination function for the flexibility of more possible transformations
+
+Implementing parallel `reduce`:
+1. Importing the proper classes and functions
+2. Rounding up some processors
+3. Passing our `reduce` function the right helper functions and variables
+
+- Python doesn't natively support parallel `reduce` -> `pathos` library
+- `toolz.fold` -> parallel `reduce` implementation
+
+> `toolz` library: functional utility library that Python never came with. High-performance version of the library = `CyToolz`
+
+# Ch7. Processing truly big datasets with Hadoop and Spark
