@@ -314,3 +314,60 @@ Implementing parallel `reduce`:
 > `toolz` library: functional utility library that Python never came with. High-performance version of the library = `CyToolz`
 
 # Ch7. Processing truly big datasets with Hadoop and Spark
+- **Hadoop**: set of tools that support distributed map and reduce style of programming through Hadoop MapReduce
+- **Spark**: analytics toolkit designed to modernize Hadoop
+
+## Distributed computing
+- share tasks and data long-term across a network of computers
+- offers large benefits in speed when we can parallelize our work
+- challenges:
+  - keeping track of all our data
+  - coordinating our work
+  
+> If we distribute our work prematurely, we’ll end up losing performance spending too much time talking between computers and processors. A lot of performance improvements at the high-performance limits of distributed computing revolve around **optimizing communication between machines**
+
+## Hadoop five modules
+1. *MapReduce*: way of dividing work into parallelizable chunks
+2. *YARN*: scheduler and resource manager
+3. *HDFS*: file system for Hadoop
+4. *Ozone*: Hadoop extension for object storage and semantic computing
+5. *Common*: set of utilities that are shared across the previous four modules
+
+### YARN for job scheduling
+- Scheduling
+  - Oversees all of the work that is being done
+  - Acts as a final decision maker in terms of how resources should be allocated across the cluster
+- Application management (*node managers*): work at the node (single-machine) level to determine how resources should be allocated within that machine
+  - *federation*: tie together resource managers in extremely high demand use cases where thousands of nodes are not sufficient
+
+### The data storage backbone of Hadoop: HDFS
+Hadoop Distributed File System (HDFS) -> reliable, performant foundation for high-performance distributed computing (but with that comes complexity). Use cases:
+- process big datasets
+- be flexible in hardware choice
+- be protected against hardware failure
+
+> Moving code is faster than moving data
+
+### MapReduce jobs using Python and Hadoop Streaming
+Hadoop MapReduce with Python -> Hadoop Streaming = utility for using Hadoop MapReduce with programming languages besides Java
+
+Hadoop natively supports compression data: .gz, .bz2, and .snappy
+
+## Spark for interactive workflows
+Analytics-oriented data processing framework designed to take advantage of higher-RAM compute clusters. Advantages for Python programmers:
+- direct Python interface - `PySpark`: allows for us to interactively explore big data through a PySpark shell REPL
+- can query SQL databases directly (Java Database Connectivity - JDBC)
+- has a *DataFrame* API: rows-and-columns data structure familiar to `pandas` -> provides a convenience layer on top of the core Spark data object: the RDD (Resilient Distributed Dataset)
+- Spark has two high-performance data structures: RDDs, which are excellent for any type of data, and DataFrames, which are optimized for tabular data.
+
+Favor Spark over Hadoop when:
+- processing streaming data
+- need to get the task completed nearly instantaneously
+- willing to pay for high-RAM compute clusters
+
+### PySpark for mixing Python and Spark
+PySpark: we can call Spark's Scala methods through Python just like we would a normal Python library
+
+# Ch8. Best practices for large data with Apache Streaming and mrjob
+
+
