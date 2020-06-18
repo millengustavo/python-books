@@ -369,5 +369,34 @@ Favor Spark over Hadoop when:
 PySpark: we can call Spark's Scala methods through Python just like we would a normal Python library
 
 # Ch8. Best practices for large data with Apache Streaming and mrjob
+Use Hadoop to process
+- lots of data fast: distributed parallelization
+- data that's important: low data loss
+- enormous amounts of data: petabyte scale
 
+Drawbacks
+- To use Hadoop with Python -> Hadoop Streaming utility
+- Repeatedly read in string from `stdin`
+- Error messages for Java are not helpful
 
+## Unstructured data: Logs and documents
+- Hadoop creators designed Hadoop to work on *unstructured data* -> data in the form of documents
+- Unstructured data is notoriously unwieldly =/= tabular data
+- But, is one of the most common forms of data around
+
+## JSON for passing data between mapper and reducer
+- JavaScript Object Notation (JSON)
+- Data format used for moving data in plain text between one place and another
+- `json.dumps()` and `json.loads()` functions from Python's json library to achieve the transfer
+- Advantages:
+  - easy for humans and machines to read
+  - provides a number of useful basic data types (string, numeric, array)
+  - emphasis on key-value pairs that aids the loose coupling of systems
+
+## mrjob for pythonic Hadoop streaming
+- `mrjob`: Python library for Hadoop Streaming that focuses on cloud compatibility for truly scalable analysis
+- keeps the mapper and reducer steps but wraps them up in a single worker class named `mrjob`
+- `mrjob` versions of `map` and `reduce` share the same type signature, taking in keys and values and outputting keys and values
+- `mrjob` enforces JSON data exchange between the mapper and reducer phases, so we need to ensure that our output data is JSON serializable.
+
+# Ch9. PageRank with map and reduce in PySpark
