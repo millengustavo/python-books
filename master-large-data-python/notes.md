@@ -400,3 +400,49 @@ Drawbacks
 - `mrjob` enforces JSON data exchange between the mapper and reducer phases, so we need to ensure that our output data is JSON serializable.
 
 # Ch9. PageRank with map and reduce in PySpark
+PySpark's RDD class methods:
+- `map`-like methods: replicate the function of `map`
+- `reduce`-like methods: replicate the function of `reduce`
+- *Convenience methods*: solve common problems
+
+> **Partitions** are the abstraction that RDDs use to implement parallelization. The data in an RDD is split up across different partitions, and each partition is handled in memory. It is common in large data tasks to partition an RDD by a key
+
+### Map-like methods in PySpark
+- `.map`
+- `.flatMap`
+- `.mapValues`
+- `.flatMapValues`
+- `. mapPartitions`
+- `.mapPartitionsWithIndex`
+
+### Reduce-like methods in PySpark
+- `.reduce`
+- `.fold`
+- `.aggregate` -> provides all the functionality of a parallel reduce. We can provide an initializer value, an aggregation function, and a combination function
+
+### Convenience methods in PySpark
+Many of these mirror functions in `functools`, `itertools` and `toolz`. Some examples:
+- .countByKey()
+- .countByValue()
+- .distinct()
+- .countApproxDistinct() 
+- .filter()
+- .first()
+- .groupBy()
+- .groupByKey()
+- .saveAsTextFile()
+- .take()
+
+#### Saving RDDs to text files
+Excellent for a few reasons:
+- The data is in a human-readable, persistent format.
+- We can easily read this data back into Spark with the `.textFile` method of `SparkContext`.
+- The data is well structured for other parallel tools, such as Hadoop’s MapReduce.
+- We can specify a compression format for efficient data storage or transfer.
+
+> RDD `.aggregate` method—returns a dict. We need an RDD so that we can take advantage of Spark’s parallelization. To get an RDD, we’ll need to explicitly convert the items of that dict into an RDD using the `.parallelize` method from our SparkContext: `sc`.
+
+- Spark programs often use \ characters in their method chaining to increase their readability
+- Using the `byKey` variations of methods in PySpark often results in significant speed-ups because like data is worked on by the same distributed compute worker
+
+# Ch10. Faster decision-making with machine learning and PySpark
