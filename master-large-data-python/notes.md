@@ -446,3 +446,38 @@ Excellent for a few reasons:
 - Using the `byKey` variations of methods in PySpark often results in significant speed-ups because like data is worked on by the same distributed compute worker
 
 # Ch10. Faster decision-making with machine learning and PySpark
+One of the reasons why Spark is so popular = built-in machine learning capabilities
+
+PySpark’s machine learning capabilities live in a package called `ml`. This package itself contains a few different modules categorizing some of the core machine learning capabilities, including
+- `pyspark.ml.feature` — For feature transformation and creation
+- `pyspark.ml.classification` — Algorithms for judging the category in which a data point belongs
+- `pyspark.ml.tuning` — Algorithms for improving our machine learners
+- `pyspark.ml.evaluation` — Algorithms for evaluating machine leaners
+- `pyspark.ml.util` — Methods of saving and loading machine learners
+
+> PySpark’s machine learning features expect us to have our data in a PySpark `DataFrame` object - not an `RDD`. The `RDD` is an abstract parallelizable data structure at the core of Spark, whereas the `DataFrame` is a layer on top of the `RDD` that provides a notion of rows and columns
+
+## Organizing the data for learning
+Spark's ml classifiers look for two columns in a `DataFrame`:
+- A `label` column: indicates the correct classification of the data
+- A `features` column: contains the features we're going to use to predict that label
+
+## Auxiliary classes
+- PySpark's `StringIndexer`: transforms categorical data stored as category names (using strings) and indexes the names as numerical variables. `StringIndexer` indexes categories in order of frequency — from most common to least common. The most common category will be 0, the second most common category 1, and so on
+- Most data structures in Spark are immutable -> property of Scala (in which Spark is written)
+- Spark's ml only want one column name `features` -> PySpark's `VectorAssembler`: `Transformer` like `StringIndexer` -> takes some input column names and an output column name and has methods to return a new `DataFrame` that has all the columns of the original, plus the new column we want to add
+- The feature creation classes are `Transformer`-class objects, and their methods return new `DataFrames`, rather than transforming them in place
+
+## Evaluation
+PySpark's `ml.evaluation` module:
+- `BinaryClassifierEvaluator`
+- `RegressionEvaluator`
+- `MulticlassClassificationEvaluator`
+
+## Cross-validation in PySpark
+`CrossValidator` class: k-fold cross-validation, needs to be initialized with:
+- An *estimator*
+- A *parameter estimator* - `ParamGridBuilder` object
+- An *evaluator*
+
+# Ch11. Large datasets in the cloud with Amazon Web Services and S3
