@@ -481,3 +481,26 @@ PySpark's `ml.evaluation` module:
 - An *evaluator*
 
 # Ch11. Large datasets in the cloud with Amazon Web Services and S3
+S3 is the go-to service for large datasets:
+1. *effectively unlimited storage capacity*. We never have to worry about our dataset becoming too large
+2.  *cloud-based*. We can scale up and down quickly as necessary.
+3.  *offers object storage*. We can focus on organizing our data with metadata and store many different types of data.
+4.  *managed service*. Amazon Web Services takes care of a lot of the details for us, such as ensuring data availability and durability. They also take care of security patches and software updates.
+5.  *supports versioning and life cycle policies*. We can use them to update or archive our data as it ages
+
+## Objects for convenient heterogenous storage
+- Object storage: storage pattern that focuses on the **what of the data instead of the where**
+- With object storage we recognize objects by a unique identifier (instead of the name and directory)
+- Supports arbitrary metadata -> we can tag our objects flexibly based on our needs (helps us find those objects later when we need to use them)
+- Querying tools are available for S3 that allow SQL-like querying on these metadata tags for metadata analysis
+- Unique identifiers -> we can store heterogenous data in the same way
+
+## Parquet: A concise tabular data store
+- CSV is a simple, tabular data store, and JSON is a human-readable document store. Both are common in data interchange and are often used in the storage of distributed large datasets. Parquet is a Hadoop- native tabular data format.
+- Parquet uses clever metadata to improve the performance of map and reduce operations. Running a job on Parquet can take as little as 1/100th the time a comparable job on a CSV or JSON file would take. Additionally, Parquet supports efficient compression. As a result, it can be stored at a fraction of the cost of CSV or JSON.
+- These benefits make Parquet an excellent option for data that primarily needs to be read by a machine, such as for batch analytics operations. JSON and CSV remain good options for smaller data or data that's likely to need some human inspection.
+
+> Boto is a library that provides Pythonic access to many of the AWS APIs. We need the access key and secret key to programmatically access AWS through boto
+
+# Ch12. MapReduce in the cloud with Amazon's Elastic MapReduce
+
