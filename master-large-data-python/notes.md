@@ -503,4 +503,44 @@ S3 is the go-to service for large datasets:
 > Boto is a library that provides Pythonic access to many of the AWS APIs. We need the access key and secret key to programmatically access AWS through boto
 
 # Ch12. MapReduce in the cloud with Amazon's Elastic MapReduce
+## Convenient cloud clusters with EMR
+Ways to get access to a compute cluster that support both Hadoop and Spark:
+- AWS: Amazon's Elastic MapReduce
+- Microsoft's Azure HDInsight
+- Google's Cloud Dataproc
+
+### AWS EMR
+- AWS EMR is a managed data cluster service
+- We specify general properties of the cluster, and AWS runs software that creates the cluster for us
+- When we're done using the cluster, AWS absorbs the compute resources back into its network
+- Pricing model is a per-compute-unit per-second charge
+- **There are no cost savings to doing thnigs slowly. AWS encourages us to parallelize our problems away**
+
+#### Starting EMR clusters with mrjob
+- We can run Hadoop jobs on EMR with the `mrjob` library, which allows us to write distributed MapReduce and procure cluster computing in Python.
+- We can use `mrjob`'s configuration files to describe what we want our clusters to look like, including which instances we’d like to use, where we’d like those instances to be located, and any tags we may want to add.
+
+> Hadoop on EMR is excellent for large data processing workloads, such as batch analytics or extract-transform-load (ETL)
+
+## Machine learning in the cloud with Spark on EMR
+- Hadoop is great for low-memory workloads and massive data. 
+- Spark is great for jobs that are harder to break down into map and reduce steps, and situations where we can afford higher memory machines
+
+### Running machine learning algorithms on a truly large dataset
+1. Get a sample of the full dataset.
+2. Train and evaluate a few models on that dataset.
+3. Select some models to evaluate on the full dataset.
+4. Train several models on the full dataset in the cloud.
+
+> Run your Spark code with `spark-submit` utility instead of Python. The `spark-submit` utility queues up a Spark job, which will run in parallel locally and simulate what would happen if you ran the program on an active cluster
+
+### EC2 instance types and clusters
+- `M-series`: use for Hadoop and for testing Spark jobs
+- `C-series`: compute-heavy workloads such as Spark analytics, Batch Spark jobs
+- `R-series`: high-memory, use for streaming analytics
+
+### Software available on EMR
+- JupyterHub: cluster-ready version of Jupyter Notebook -> run interactive Spark and Hadoop jobs from a notebook environment
+- Hive: compile SQL code to Hadoop MapReduce jobs
+- Pig: compile *Pig-latin* (SQL-like) commands to run Hadoop MapReduce jobs
 
