@@ -6,6 +6,85 @@ Authors: John T. Wolohan
 
 ![cover](cover.png)
 
+- [Mastering Large Datasets with Python: Parallelize and Distribute Your Python Code](#mastering-large-datasets-with-python-parallelize-and-distribute-your-python-code)
+- [Ch1. Introduction](#ch1-introduction)
+  - [Procedural programming](#procedural-programming)
+  - [Parallel programming](#parallel-programming)
+  - [The map function for transforming data](#the-map-function-for-transforming-data)
+  - [The reduce function for advanced transformations](#the-reduce-function-for-advanced-transformations)
+  - [Distributed computing for speed and scale](#distributed-computing-for-speed-and-scale)
+  - [Hadoop: A distributed framework for map and reduce](#hadoop-a-distributed-framework-for-map-and-reduce)
+  - [Spark for high-powered map, reduce, and more](#spark-for-high-powered-map-reduce-and-more)
+  - [AWS Elastic MapReduce (EMR) - Large datasets in the cloud](#aws-elastic-mapreduce-emr---large-datasets-in-the-cloud)
+- [Ch2. Accelerating large dataset work: Map and parallel computing](#ch2-accelerating-large-dataset-work-map-and-parallel-computing)
+  - [Pattern](#pattern)
+  - [Lazy functions for large datasets](#lazy-functions-for-large-datasets)
+  - [Parallel processing](#parallel-processing)
+    - [Problems](#problems)
+      - [Inability to pickle data or functions](#inability-to-pickle-data-or-functions)
+      - [Order-sensitive operations](#order-sensitive-operations)
+      - [State-dependent operations](#state-dependent-operations)
+  - [Other observations](#other-observations)
+- [Ch3. Function pipelines for mapping complex transformations](#ch3-function-pipelines-for-mapping-complex-transformations)
+  - [Helper functions and function chains](#helper-functions-and-function-chains)
+    - [Creating a pipeline](#creating-a-pipeline)
+      - [Compose](#compose)
+      - [Pipe](#pipe)
+  - [Summary](#summary)
+- [Ch4. Processing large datasets with lazy workflows](#ch4-processing-large-datasets-with-lazy-workflows)
+  - [Laziness](#laziness)
+    - [Shrinking sequences with the filter function](#shrinking-sequences-with-the-filter-function)
+    - [Combining sequences with zip](#combining-sequences-with-zip)
+    - [Lazy file searching with iglob](#lazy-file-searching-with-iglob)
+  - [Understanding iterators: the magic behind lazy Python](#understanding-iterators-the-magic-behind-lazy-python)
+  - [Generators: functions for creating data](#generators-functions-for-creating-data)
+  - [Simulations](#simulations)
+- [Ch5. Accumulation operations with reduce](#ch5-accumulation-operations-with-reduce)
+  - [Three parts of reduce](#three-parts-of-reduce)
+    - [Accumulator functions](#accumulator-functions)
+  - [Reductions](#reductions)
+  - [Using map and reduce together](#using-map-and-reduce-together)
+  - [Speeding up map and reduce](#speeding-up-map-and-reduce)
+- [Ch6. Speeding up map and reduce with advanced parallelization](#ch6-speeding-up-map-and-reduce-with-advanced-parallelization)
+  - [Getting the most out of parallel map](#getting-the-most-out-of-parallel-map)
+    - [More parallel maps: `.imap` and `starmap`](#more-parallel-maps-imap-and-starmap)
+      - [`.imap`](#imap)
+      - [`starmap`](#starmap)
+  - [Parallel reduce for faster reductions](#parallel-reduce-for-faster-reductions)
+- [Ch7. Processing truly big datasets with Hadoop and Spark](#ch7-processing-truly-big-datasets-with-hadoop-and-spark)
+  - [Distributed computing](#distributed-computing)
+  - [Hadoop five modules](#hadoop-five-modules)
+    - [YARN for job scheduling](#yarn-for-job-scheduling)
+    - [The data storage backbone of Hadoop: HDFS](#the-data-storage-backbone-of-hadoop-hdfs)
+    - [MapReduce jobs using Python and Hadoop Streaming](#mapreduce-jobs-using-python-and-hadoop-streaming)
+  - [Spark for interactive workflows](#spark-for-interactive-workflows)
+    - [PySpark for mixing Python and Spark](#pyspark-for-mixing-python-and-spark)
+- [Ch8. Best practices for large data with Apache Streaming and mrjob](#ch8-best-practices-for-large-data-with-apache-streaming-and-mrjob)
+  - [Unstructured data: Logs and documents](#unstructured-data-logs-and-documents)
+  - [JSON for passing data between mapper and reducer](#json-for-passing-data-between-mapper-and-reducer)
+  - [mrjob for pythonic Hadoop streaming](#mrjob-for-pythonic-hadoop-streaming)
+- [Ch9. PageRank with map and reduce in PySpark](#ch9-pagerank-with-map-and-reduce-in-pyspark)
+    - [Map-like methods in PySpark](#map-like-methods-in-pyspark)
+    - [Reduce-like methods in PySpark](#reduce-like-methods-in-pyspark)
+    - [Convenience methods in PySpark](#convenience-methods-in-pyspark)
+      - [Saving RDDs to text files](#saving-rdds-to-text-files)
+- [Ch10. Faster decision-making with machine learning and PySpark](#ch10-faster-decision-making-with-machine-learning-and-pyspark)
+  - [Organizing the data for learning](#organizing-the-data-for-learning)
+  - [Auxiliary classes](#auxiliary-classes)
+  - [Evaluation](#evaluation)
+  - [Cross-validation in PySpark](#cross-validation-in-pyspark)
+- [Ch11. Large datasets in the cloud with Amazon Web Services and S3](#ch11-large-datasets-in-the-cloud-with-amazon-web-services-and-s3)
+  - [Objects for convenient heterogenous storage](#objects-for-convenient-heterogenous-storage)
+  - [Parquet: A concise tabular data store](#parquet-a-concise-tabular-data-store)
+- [Ch12. MapReduce in the cloud with Amazon's Elastic MapReduce](#ch12-mapreduce-in-the-cloud-with-amazons-elastic-mapreduce)
+  - [Convenient cloud clusters with EMR](#convenient-cloud-clusters-with-emr)
+    - [AWS EMR](#aws-emr)
+      - [Starting EMR clusters with mrjob](#starting-emr-clusters-with-mrjob)
+  - [Machine learning in the cloud with Spark on EMR](#machine-learning-in-the-cloud-with-spark-on-emr)
+    - [Running machine learning algorithms on a truly large dataset](#running-machine-learning-algorithms-on-a-truly-large-dataset)
+    - [EC2 instance types and clusters](#ec2-instance-types-and-clusters)
+    - [Software available on EMR](#software-available-on-emr)
+
 # Ch1. Introduction
 Map and reduce style of programming:
 - easily write parallel programs
@@ -514,7 +593,7 @@ Ways to get access to a compute cluster that support both Hadoop and Spark:
 - We specify general properties of the cluster, and AWS runs software that creates the cluster for us
 - When we're done using the cluster, AWS absorbs the compute resources back into its network
 - Pricing model is a per-compute-unit per-second charge
-- **There are no cost savings to doing thnigs slowly. AWS encourages us to parallelize our problems away**
+- **There are no cost savings to doing things slowly. AWS encourages us to parallelize our problems away**
 
 #### Starting EMR clusters with mrjob
 - We can run Hadoop jobs on EMR with the `mrjob` library, which allows us to write distributed MapReduce and procure cluster computing in Python.
@@ -544,3 +623,4 @@ Ways to get access to a compute cluster that support both Hadoop and Spark:
 - Hive: compile SQL code to Hadoop MapReduce jobs
 - Pig: compile *Pig-latin* (SQL-like) commands to run Hadoop MapReduce jobs
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
