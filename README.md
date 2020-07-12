@@ -4,6 +4,8 @@
 
 - Mastering Large Datasets with Python: Parallelize and Distribute Your Python Code - John T. Wolohan [[open notes]](./master-large-data-python/notes.md)
 
+- Clean Code: A Handbook of Agile Software Craftsmanship - Robert C. Martin [[open notes]](./clean-code/notes.md)
+
 - Fluent Python - Luciano Ramalho
 
 ![compiler_options](high-performance-python/compiler_options.png)
