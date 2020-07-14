@@ -22,6 +22,63 @@ Author: Robert C. Martin
 
 # Ch2. Meaningful Names
 
+## Use intention-revealing names
+> Choosing good names takes time, but saves more than it takes. Take care with your names and change them when you find better ones
+
+## Avoid disinformation
+- Avoid leaving false clues that obscure the meaning of code
+- Avoid words whose entrenched meanings vary from our intended meaning
+
+## Make meaningful distinctions
+If names must be different, then they should also mean something different
+
+## Use pronounceable names
+- Humans are good at words
+- Words are, by definition, pronounceable
+
+## Use searchable names
+Single-letter names and numeric constants have a particular problem in that they are not easy to locate across a body of text
+
+## Avoid encodings
+Encoding type or scope information into names simply adds an extra burden of deciphering
+
+## Avoid mental mapping
+> Clarity is king
+
+## Class names
+- Classes and objects should have noun or noun phrase names
+- A class name should not be a verb
+
+## Method names
+Methods should have verb or verb phrase names
+
+## Don't be cute
+- Choose clarity over entertainment value
+- Say what you mean. Mean what you say
+
+## Pick one word per concept
+A consistent lexicon is a great boon to the programmers who must use your code
+
+## Don't pun
+Avoid using the same word for two purposes -> essentially a pun
+
+## Use solution domain names
+- People who read your code will be programmers
+- Use CS terms, algorithm names, pattern names, math terms
+
+## Use problem domain names
+- Separate solution and problem domain concepts
+- Code that has more to do with problem domain concepts should have names drawn from the problem domain
+
+## Add meaningful context
+Most names are not meaningful in and of themselves
+
+## Don't add gratuitous context
+- Shorter names are generally better than long ones, so long as they are clear
+- Add no more context to a name than is necessary
+
+> Choosing good names requires good descriptive skills and a shared cultural background. This is a teaching issue rather than a technical, business, or management issue
+
 # Ch3. Functions
 
 # Ch4. Comments
