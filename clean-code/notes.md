@@ -80,6 +80,59 @@ Most names are not meaningful in and of themselves
 > Choosing good names requires good descriptive skills and a shared cultural background. This is a teaching issue rather than a technical, business, or management issue
 
 # Ch3. Functions
+## Small
+Functions should be small
+
+### Blocks and Indenting
+- Blocks within `if` statements, `else` statements, `while` statements should be on line long -> probably a function call
+- Keep the enclosing function small, adds documentary value
+- Functions should not be large enough to hold nested structures -> makes easier to read and understand
+
+## Do one thing
+> Functions should do one thing. They should do it well. They should do it only
+
+- Reasons to write functions: decompose a larger concept (the name of the function) into a set of steps at the next level of abstraction
+- Functions that do one thing cannot be divided into sections
+
+## One level of abstraction per function
+- Once details are mixed with essential concepts, more details tend to accrete within the function
+
+### The Stepdown rule
+- We want code to be read like a top-down narrative
+- A set of TO paragraphs, each describing the current level of abstraction and referencing subsequent TO paragraphs at the next level down
+
+## Use descriptive names
+Ward's principle: *"You know you are working on clean code when each routine turns out to be pretty much what you expected"*
+
+- Spend time choosing a name
+- You should try several different names and read the code with each in place
+
+## Function arguments
+Ideal number of arguments for a function:
+- zero (niladic)
+- one (monadic)
+- two (dyadic)
+- more than that should be avoided where possible
+
+- **Arguments are hard from a testing point of view** -> test cases for all combinations of arguments
+- Output arguments are harder to understand than input arguments
+- **Passing a boolean into a function (flag arguments) is a terrible practice** -> loudly proclaiming that this function does more than one thing -> does one thing if the flag is true and another if the flag is false!
+- When a function seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class of their own -> When groups of variables are passed together, they are likely part of a concept that deserves a name of its own
+- Side effects are lies -> your functions promises to do one thing, but it also does other *hidden* things
+- Either your function should change the state of an object, or it should return some information about the object
+- **Prefer Exceptions to returing error codes**
+- Extract try/catch blocks into functions of their own
+- Functions should do one thing -> error handling is one thing
+- Don't repeat yourself -> duplication may be the root of all evil in software
+
+## How do you write functions like this?
+Writing software is like any other kind of writing
+1. Get your thoughts down first
+2. Massage it until it reads well
+
+The first draft might be clumsy and disorganized, so you restructure it and refine it until it reads the way you want it to read
+
+> Every system is built from a domain-specific language designed by the programmers to describe the system. Functions are the verbs of that language, and classes are the nouns.
 
 # Ch4. Comments
 
