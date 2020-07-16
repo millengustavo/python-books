@@ -135,6 +135,14 @@ The first draft might be clumsy and disorganized, so you restructure it and refi
 > Every system is built from a domain-specific language designed by the programmers to describe the system. Functions are the verbs of that language, and classes are the nouns.
 
 # Ch4. Comments
+- Comments are always failures. We must have them because we cannot always figure out how to express ourselves without them, but their use is not a cause for celebration
+- Comments lie. Not always, and not intentionally, but too often
+- The older a comment is, and the farther away it is from the code it describes, the more likely it is to be wrong
+- **Truth can only be found in the code**
+- Explain your intent in code: **create a function that says the same thing as the comment you want to write**
+- A comment may be used to amplify the importance of something that may otherwise seem inconsequential
+- We have good source code control systems now. Those systems will remember the code for us. We don’t have to comment it out any more. Just delete the code
+- Short functions don't need much description -> well-chosen name for a small function that does one thing is better than a comment header
 
 # Ch5. Formatting
 
