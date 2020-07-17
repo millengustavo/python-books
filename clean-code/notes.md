@@ -145,6 +145,24 @@ The first draft might be clumsy and disorganized, so you restructure it and refi
 - Short functions don't need much description -> well-chosen name for a small function that does one thing is better than a comment header
 
 # Ch5. Formatting
+Code formatting
+- Too important to ignore
+- Is about communication -> developer's first order of business
+
+> Small files are easier to understand than large files are
+
+## The newspaper metaphor
+Source file should be like a newspaper article
+- Name should be simple but explanatory
+- The name, by itself, should be sufficient to tell us whether we are in the right module or not
+
+## Vertical formatting
+- Avoid forcing the reader to hop around through the source files and classes
+- **Dependent functions**: if one function calls another, they should be vertically close, and the caller should be above the callee
+
+## Horizontal formatting
+- Strive to keep your lines short
+- Beyond 100~120 isn't advisable
 
 # Ch6. Objects and Data Structures
 
