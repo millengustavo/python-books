@@ -166,6 +166,31 @@ Source file should be like a newspaper article
 
 # Ch6. Objects and Data Structures
 
+## Data/Object anti-symmetry
+> Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions
+
+- Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures. OO code makes it easy to add new classes without changing existing functions
+- Procedural code makes it hard to add new data structures because all the functions must change. OO code makes it hard to add new functions because all the classes must change
+
+> Mature programmers know that the idea that *everything is an object is a myth*. Sometimes you really do want simple data structures with procedures operating on them
+
+## Data transfer objects (DTO)
+DTO: quintessential form of a data structure -> a class with public variables and no functions
+
+### Active records
+- Special forms of DTOs
+- Data structures with public (or bean-accessed) variables; but they typically have navigational methods like `save` and `find`
+
+## Objects 
+- expose behavior and hide data
+- easy to add new kinds of objects without changing existing behaviors 
+- hard to add new behaviors to existing objects 
+
+## Data Structures 
+- expose data and have no significant behavior
+- easy to add new behaviors to existing data structures
+- hard to add new data structures to existing functions
+
 # Ch7. Error Handling
 
 # Ch8. Boundaries
