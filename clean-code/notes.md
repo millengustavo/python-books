@@ -192,6 +192,25 @@ DTO: quintessential form of a data structure -> a class with public variables an
 - hard to add new data structures to existing functions
 
 # Ch7. Error Handling
+> Things can go wrong, and when they do, we as programmers are responsible for making sure that our code what it needs to do
+
+- Error handling is important, but if it obscures logic, it's wrong
+- It is better to throw an exception when you encounter an error. The calling code is cleaner. Its logic is not obscured by error handling
+
+## Write your `Try-Catch-Finally` statement first
+- `try` blocks are like transactions
+- Your `catch` has to leave your program in a consistent state, no matter what happens in the `try`
+- Try to write tests to force exceptions, and then add behavior to your handler to satisfy your tests -> cause you to build the transaction scope of the `try` block first and help maintain the transaction nature of that scope
+
+## Provide context with exceptions
+- Create informative error messages and pass them along with your exceptions
+- Mention the operation that failed and the type of failure
+- If you are logging in your application, pass along enough information to be able to log the error in your `catch`
+
+> Wrapping third-party APIs is a best practice -> minimize your dependencies upon it: you can choose to move to a different library in the future without much penalty; makes it easier to mock out third-party calls when you are testing your own code
+
+## Define the normal flow
+**Special case pattern**: you create a class or configure an object so that it handles a special case for you -> the client code doesn't have to deal with exceptional behavior 
 
 # Ch8. Boundaries
 
