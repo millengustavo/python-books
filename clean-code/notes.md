@@ -213,6 +213,11 @@ DTO: quintessential form of a data structure -> a class with public variables an
 **Special case pattern**: you create a class or configure an object so that it handles a special case for you -> the client code doesn't have to deal with exceptional behavior 
 
 # Ch8. Boundaries
+- It's not our job to test the third-party code, but it may be in our best interest to write tests for the third-party code we use
+- **Learning tests**: call the third-party API, as we expect to use it in our application -> controlled experiments that check our understanding of that API
+- **Clean Boundaries**: code at the boundaries needs clear separation and tests that define expectations
+
+> Avoid letting too much of our code know about the third-party particulars. It's betters to depend on something you control than on something you don't control, lest it end up controlling you
 
 # Ch9. Unit Tests
 
