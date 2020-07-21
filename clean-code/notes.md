@@ -220,6 +220,43 @@ DTO: quintessential form of a data structure -> a class with public variables an
 > Avoid letting too much of our code know about the third-party particulars. It's betters to depend on something you control than on something you don't control, lest it end up controlling you
 
 # Ch9. Unit Tests
+## The three laws of TDD
+- **First Law**: You may not write production code until you have written a failing unit test
+- **Second Law**: You may not write more of a unit test than is sufficient to fail, and not compiling is failing
+- **Third Law**: You may not write more production code than is sufficient to pass the current failing test
+
+## Keeping tests clean
+- Having dirty tests is equivalent to, if not worse than, having no tests
+- Tests must change as the production code evolves -> the dirtier the tests, the harder they are to change
+- If your tests are dirty, you begin to lose the ability to improve the structure of that code
+> Test code is just as important as production code. It requires thought, design, and care. It must be kept as clean as production code
+
+## Clean tests
+Readability is perhaps even more important in unit tests than it is in production code
+- Clarity
+- Simplicity
+- Density of expression (say a lot with as few expressions as possible)
+
+**BUILD-OPERATE-CHECK** pattern:
+- First part builds up the test data
+- Second part operates on that test data
+- Third part checks that the operation yielded the expected results
+
+**Domain-Specific Testing Language**: testing language (specialized API used by the tests) -> make tests expressive and succint -> make the tests more convenient to write and easier to read
+
+**given-when-then** convention: makes the tests even easier to read
+
+**TEMPLATE METHOD** pattern -> putting the given/when parts in the base classs, and the then parts in different derivatives
+
+- The number of asserts in a test ought to be minimized
+- We want to test a single concept in each test function
+
+## F.I.R.S.T.
+- **Fast**: when tests run slow, you won't want to run them frequently
+- **Independent**: you should be able to run each test independently and run the tests in any order you like
+- **Repeatable**: if your tests aren't repeatable in any environment, then you'll always have an excuse for why they fail
+- **Self-Validating**: you should not have to read through a log file to tell whether the tests pass (should have a boolean output -> pass/fail)
+- **Timely**: unit tests should be written just before the production code that makes them pass
 
 # Ch10. Classes
 
