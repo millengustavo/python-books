@@ -259,6 +259,35 @@ Readability is perhaps even more important in unit tests than it is in productio
 - **Timely**: unit tests should be written just before the production code that makes them pass
 
 # Ch10. Classes
+- Smaller is the primary rule when it comes to designing classes
+- Name of the class = describe what responsibilities it fulfills
+- If we cannot derive a concise name for a class, then it's likely too large -> the more ambiguous the class name, the more likely it has too many responsibilities
+
+## The Single Responsibility Principle
+- **SRP** is one of the more important concepts in OO design
+- States that a class or module should have one and only one, *reason to change*
+- Definition of responsibility
+- Guidelines for class size
+- A system with many small classes has no more moving parts than a system with a few large classes
+
+> Trying to identify responsibilities (reasons to change) often helps us recognize and create better abstractions in our code
+
+## Cohesion
+- Classes should have a small number of instance variables
+- Each of the methods of a class should manipulate one or more of those variables
+- A class in which each variable is used by each method is **maximally cohesive**
+- Maintaining cohesion results in many small classes
+
+## Organizing for change
+- Change is continual
+- Every change -> risk that the remainder of the system no longer works as intended
+- Clean system -> organize our classes to reduce the risk of change
+
+> **Open-Closed Principle (OCP)**: another key OO class design principle -> Classes should be open for extension but closed for modification
+
+- Ideal system -> we incorporate new features by extending the system, not by making modifications to existing code
+
+> **Dependency Inversion Principle (DIP)** -> classes should depend upon abstractions, not on concrete details
 
 # Ch11. Systems
 
