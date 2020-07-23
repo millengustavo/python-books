@@ -290,6 +290,39 @@ Readability is perhaps even more important in unit tests than it is in productio
 > **Dependency Inversion Principle (DIP)** -> classes should depend upon abstractions, not on concrete details
 
 # Ch11. Systems
+## Separate constructing a system from using it
+> Software systems should separate the startup process, when the application objects are constructed and the dependencies are "wired" together, from the runtime logic that takes over after startup
+
+- Startup process: *concern* that any application must address
+- *Separation of concerns*: one of the most important design techniques
+- Never let little, convenient idioms lead to modularity breakdown
+
+## Separation of main
+### Factories
+- **ABSTRACT FACTORY**: pattern -> give the application control of *when* to build the object, but keep the details of that construction separate from the application code
+
+### Dependency injection (DI)
+- Powerful mechanism for separating construction from use
+- Application of *Inversion of Control* (IoC) to dependency management
+- Moves secondary responsibilities from an object to other objects that are dedicated to the purpose (supporting SRP)
+- The invoking object doesn't control what kind of object is actually returned, but the invoking object still actively resolves the dependency
+> An object should not take responsibility for instantiating dependencies itself. Instead, it should pass this responsibility to another "authoritative" mechanism (inverting control). Setup is a global concern, this authoritative mechanism will be either the "main" routine or a special-purpose container 
+
+## Scaling up
+- **Myth**: we can get systems "right the first time"
+- Implement only today's stories -> then refactor and expand the system to implement new stories tomorrow = essence of iterative and incremental agility
+- TDD, refactoring, and the clean code they produce make this work at the code level
+- Software systems are unique compared to physical systems. Their archiectures can grow incrementally, **if we maintain the proper separation of concerns**
+
+## Test drive the system architecture
+- **Big Design Up Front (BDUF)**: harmful because it inhibits adapting to change, due to psychological resistance to discarding prior effort and because of the way architecture choices influence subsequent thinking about the design
+
+## Optimize decision making
+- Modularity and separation of concerns make decentralized management and decision making possible
+- Give responsibilities to the most qualified persons
+- **It is best to postpone decisions until the last possible moment** -> lets us make informed choices with the best possible information. A premature decision is a decision made with suboptimal knowledge
+
+> Whether you are designing systems or individual modules, never forget to use **the simplest thing that can possibly work**
 
 # Ch12. Emergence
 
