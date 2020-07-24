@@ -325,6 +325,40 @@ Readability is perhaps even more important in unit tests than it is in productio
 > Whether you are designing systems or individual modules, never forget to use **the simplest thing that can possibly work**
 
 # Ch12. Emergence
+A design is "simple", if it follows these rules:
+- Run all the tests
+- Contains no duplication
+- Expresses the intent of the programmer
+- Minimizes the number of classes and methods
+
+## Simple design rule 1: runs all the tests
+- Systems that aren't testable aren't verifiable
+- A system that cannot be verified should never be deployed
+- Tight coupling makes it difficult to write tests
+- The more tests we write, the more we use principles like DIP and tools like dependency injection, interfaces, and abstraction to minimize coupling -> our designs improve even more
+- Primary OO goals -> low coupling and high cohesion
+
+## Simple design rule 2-4: refactoring
+For each few lines of code we add, we pause and reflect on the new design
+
+### No duplication
+- Duplication is the primary enemy of a well-designed system
+- It represents additional work, additional risk, and additional unnecessary complexity
+- TEMPLATE METHOD pattern: common technique for removing higher-level duplication
+
+### Expressive
+> It's easy to write code that *we* understand, because at the time we write it we're deep in an understanding of the problem we're trying to solve. Other maintainers of the code aren't going to have so deep an understanding
+
+- Choose good names
+- Keep your functions and classes small
+- Use standard nomenclature
+- Tests primary goal = act as documentation by example
+- **The most important way to be expressive is to try. Care is a precious resource**
+
+### Minimal classes and methods
+- Effort to make our classes and methods small -> we might create too many tiny classes and methods -> **also keep our function and class counts low!**
+
+> Although it's important to keep class and function count low, it's more important to have tests, eliminate duplication, and express yourself
 
 # Ch13. Concurrency
 
