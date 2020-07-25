@@ -361,5 +361,38 @@ For each few lines of code we add, we pause and reflect on the new design
 > Although it's important to keep class and function count low, it's more important to have tests, eliminate duplication, and express yourself
 
 # Ch13. Concurrency
+> Objects are abstractions of processing. Threads are abstractions of schedule - James O. Coplien
+
+## Why concurrency?
+- Concurrency is a decoupling strategy
+- Helps us decouple **what** gets done from **when** it gets done
+
+## Myths and misconceptions
+- Concurrency can *sometimes* improve performance, but only when there is a lot of wait time that can be shared between multiple threads or multiple processors
+- The design of a concurrent algorithm can be remarkably different from the design of a single-threaded system
+- **Concurrency bugs aren't usually repeatable**, so they are often ignored as one-offs instead of the true defects they are
+- Concurrency often requires a fundamental change in design strategy
+
+## Concurrency defense principles
+- **Single responsibility principle**: keep your concurrency-related code separate from other code
+- **Limit the scope of data**: data encapsulation; severely limit the access of any data that may be shared
+- **Use copies of data**
+- **Threads should be as independent as possible**
+
+### Know your execution models
+- **Producer-Consumer**
+- **Readers-Writers**
+- **Dining Philosophers**
+
+### Others
+- Keep synchronized sections small
+- Think about shut-down early and get it working early
+- Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load
+- Do not ignore system failures as one-offs
+- Do not try to chase down nonthreading bugs and threading bugs at the same time. Make sure your code works outside of threads
+- Make your thread-based code especially pluggable so that you can run it in various configurations
+- Run your threaded code on all target platforms early and often
+
+> Code that is simple to follow can become nightmarish when multiple threads and shared data get into the mix -> you need to write clean code with rigor or else face subtle and infrequent failures
 
 # Ch14. Successive Refinement
