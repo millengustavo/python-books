@@ -84,6 +84,45 @@ Author: Chetan Giridhar
 > **Derived classes must be able to completely substitute the base classes**
 
 ## The concept of design patterns
+- Solutions to given problems
+- Design patterns are discoveries and not a invention in themselves
+- Is about learning from others' successes rather than your own failures!
 
+### Advantages of design patterns
+- Reusable across multiple projects
+- Architectural level of problems can be solved
+- Time-tested and well-proven, which is the experience of developers and architects
+- They have reliability and dependence
+
+### Patterns for dynamic languages
+Python:
+- Types or classes are objects at runtime
+- Variables can have type as a value and can be modified at runtime
+- Dynamic languages have more flexibility in terms of class restrictions
+- Everything is public by default
+- Design patterns can be easily implemented in dynamic languages
+
+## Classifying patterns
+- Creational
+- Structural
+- Behavioral
+
+> Classification of patterns is done based primarily on how the objects get created, how classes and objects are structured in a software application, and also covers the way objects interact among themselves
+
+### Creational patterns
+- Work on the basis of how objects can be created
+- Isolate the details of object creation
+- Code is independent of the type of object to be created
+
+### Structural patterns
+- Design the structure of objects and classes so that they can compose to achieve larger results
+- Focus on simplifying the structure and identifying the relationship between classes and objects
+- Focus on class inheritance and composition
+
+### Behavioral patterns
+- Concerned with the interaction among objects and responsibilities of objects
+- Objects should be able to interact and still be loosely coupled
+
+# Ch2. The singleton design pattern
 
 
