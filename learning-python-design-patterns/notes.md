@@ -124,5 +124,26 @@ Python:
 - Objects should be able to interact and still be loosely coupled
 
 # Ch2. The singleton design pattern
+- Typically used in logging or database operations, printer spoolers, thread pools, caches, dialog boxes, registry settings, and so on
+- Ensure that only one object of the class gets created
+- Provide an access point for an object that is global to the program
+- Control concurrent access to resources that are shared
+- Make the constructor private and create a static method that does the object initialization
+- Override the `__new__` method (Python's special method to instantiate objects) to control the object creation
+- Another use case: **lazy instantiation**. Makes sure that the object gets created when it's actually needed
+- All modules are Singletons by default because of Python's importing behavior
 
+## Monostate Singleton pattern
+- All objects share the same state
+- Assign the `__dict__` variable with the `__shared_state` class variable. Python uses `__dict__` to store the state of every object of a class
 
+## Singletons and metaclasses
+- A metaclass is a class of a class
+- The class is an instance of its metaclass
+- Programmers get an opportunity to create classes of their own type from the predefined Python classes
+
+## Drawbacks
+- Singletons have a global point of access
+- Al classes that are dependent on global variables get tightly coupled as a change to the global data by one class can inadvertently impact the other class
+
+# Ch3. The factory pattern - building factories to create objects
