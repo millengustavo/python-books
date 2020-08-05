@@ -6,6 +6,8 @@
 
 - Clean Code: A Handbook of Agile Software Craftsmanship - Robert C. Martin [[open notes]](./clean-code/notes.md)
 
+- Learning Python Design Patterns - Chetan Giridhar [[open notes]](./learning-python-design-patterns/notes.md)
+
 - Fluent Python - Luciano Ramalho
 
 ![compiler_options](high-performance-python/compiler_options.png)
