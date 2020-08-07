@@ -147,3 +147,45 @@ Python:
 - Al classes that are dependent on global variables get tightly coupled as a change to the global data by one class can inadvertently impact the other class
 
 # Ch3. The factory pattern - building factories to create objects
+
+## Understanding the factory pattern
+- Factory = a class that is responsible for creating objects of other types
+- The class that acts as a factory has an object and methods associated with it
+- The client calls this method with certain parameters; objects of desired types are created in turn and returned to the client by the factory
+
+**Advantages**
+- Loose coupling: object creation can be independent of the class implementation
+- The client only needs to know the interface, methods, and parameters that need to be passed to create objects of the desired type (simplifies implementations for the client)
+- Adding another class to the factory to create objects of another type can be easily done without the client changing the code
+
+## The simple factory pattern
+- Not a pattern in itself
+- Helps create objects of different types rather than direct object instantiation
+
+## The factory method pattern
+- We define an interface to create objects, but instead of the factory being responsible for the object creation, the responsibility is deferred to the subclass that decides the class to be instantiated
+- Creation is through inheritance and not through instantiation
+- Makes the design more customizable. It can return the same instance or subclass rather than an object of a certain type
+
+> The factory method pattern defines an interface to create an object, but defers the decision ON which class to instantiate to its subclasses
+
+**Advantages**
+- Makes the code generic and flexible, not being tied to a certain class for instantiation. We're dependent on the interface (Product) and not on the ConcreteProduct class
+- Loose coupling: the code that creates the object is separate from the code that uses it
+- The client don't need to bother about what argument to pass and which class to instantiate -> the addition of new classes is easy and involves low maintenance
+
+## The abstract factory pattern
+
+> Provide an interface to create families of related objects without specifying the concrete class
+
+- Makes sure that the client is isolated from the creation of objects but allowed to use the objects created
+
+## Factory method versus abstract factory method
+
+|                       **Factory method**                       |                          **Abstract Factory method**                           |
+| :------------------------------------------------------------: | :----------------------------------------------------------------------------: |
+|      Exposes a method to the client to create the objects      |             Contains one or more factory methods of another class              |
+| Uses inheritance and subclass to decide which object to create | Uses composition to delegate responsibility to create objects of another class |
+|                 Is used to create one product                  |                 Is about creating families of related products                 |
+
+# Ch4. The façade pattern - being adaptive with façade
