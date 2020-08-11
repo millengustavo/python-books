@@ -189,3 +189,35 @@ Python:
 |                 Is used to create one product                  |                 Is about creating families of related products                 |
 
 # Ch4. The façade pattern - being adaptive with façade
+
+## Understanding Structural design patterns
+- Describe how objects and classes can be combined to form larger structures. Structural patterns are a combination of class and object patterns
+- Ease the design by identifying simpler ways to realize or demonstrate relationships between entities
+- Class patterns: describe abstraction with the help of inheritance and provide a more useful program interface
+- Object patterns: describe how objects can be associated and composed to form larger objects
+
+## Understanding the Façade design pattern
+> Façade hides the complexities of the internal system and provides an interface to the client that can access the system in a very simplified way
+
+- Provides an unified interface to a set of interfaces in a subsystem and defines a high-level interface that helps the client use the subsystem in an easy way
+- Discusses representing a complex subsystem with a single interface object -> it doesn't encapsulate the subsystem, but actually combines the underlying subsystems
+- Promotes the decoupling of the implementation with multiple clients
+
+## Main participants
+- **Façade**: wrap up a complex group of subsystems so that it can provide a pleasing look to the outside world
+- **System**: represents a set of varied subsystems that make the whole system compound and difficult to view or work with
+- **Client**: interact with the façade so that it can easily communicate with the subsystem and get the work completed (doesn't have to bother about the complex nature of the system)
+
+## The principle of least knowledge
+- Design principle behind Façade pattern
+- Reduce the interactions between objects to just a few friend that are close enough to you
+
+## The Law of Demeter
+- Design guideline:
+  - Each unit should have only limited knowledge of other units of the system
+  - A unit should talk to its friends only
+  - A unit should not know about the internal details of the object that it manipulates
+
+> The principle of least knowledge and Law of Demeter are the same and both point to the philosophy of *loose coupling*
+
+# Ch5. The proxy pattern - controlling object access
