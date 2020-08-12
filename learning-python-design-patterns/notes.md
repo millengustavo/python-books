@@ -221,3 +221,39 @@ Python:
 > The principle of least knowledge and Law of Demeter are the same and both point to the philosophy of *loose coupling*
 
 # Ch5. The proxy pattern - controlling object access
+> Proxy: a system that intermediates between the seeker and provider. Seeker is the one that makes the request, and provider delivers the resources in response to the request
+
+- A proxy server encapsulates requests, enables privacy, and works well in distributed architectures
+- Proxy is a wrapper or agent object that wraps the real serving object
+- Provide a surrogate or placeholder for another object in order to control access to a real object
+- Some useful scenarios:
+  - Represents a complex system in a simpler way
+  - Acts as a shield against malicious intentions and protect the real object
+  - Provides a local interface for remote objects on different servers
+  - Provides a light handle for a higher memory-consuming object
+
+## Data Structure components
+- **Proxy**
+- **Subject/RealSubject**
+- **Client**
+
+## Different types of proxies
+- **Virtual proxy**: placeholder for objects that are very heavy to instantiate
+- **Remote proxy**: provides a local representation of a real object that resides on a remote server or different address space
+- **Protective proxy**: controls access to the sensitive matter object of `RealSubject`
+- **Smart proxy**: interposes additional actions when an object is accessed
+
+| Proxy                                                                                                     | Façade                                                          |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Provides you with a surrogate or placeholder for another object to control access to it                   | Provides you with an interface to large subsystems of classes   |
+| A Proxy object has the same interface as that of the target object and holds references to target objects | Minimizes the communication and dependencies between subsystems |
+| Acts as an intermediary between the client and object that is wrapped                                     | Provides a single simplified interface                          |
+
+### Decorator vs Proxy
+- Decorator adds behavior to the object that it decorates at runtime
+- Proxy controls access to an object
+
+### Disadvantages
+- Proxy pattern can increase the response time
+
+# Ch6. The observer pattern - keeping objects in the know
