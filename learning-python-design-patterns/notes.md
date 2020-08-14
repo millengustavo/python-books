@@ -257,3 +257,36 @@ Python:
 - Proxy pattern can increase the response time
 
 # Ch6. The observer pattern - keeping objects in the know
+
+## Behavioral patterns
+- Focus on the responsibilities that an object has
+- Deal with the interaction among objects to achieve larger functionality
+- Objects should be able to interact with each other, **but they should still be loosely coupled**
+
+## Understanding the observer design pattern
+> An object (Subject) maintains a list of dependents (Observers) so that the Subject can notify all the Observers about the changes that it undergoes using any of the methods defined by the Observer
+
+- Defines a one-to-many dependency between objects so that any change in one object will be notified to the other dependent objects automatically
+- Encapsulates the core component of the Subject
+
+## The pull model
+- Subject broadcasts to all the registered Observers when there is any change
+- Observer is responsible for getting the changes or pulling data from the subscriber when there is an amendment
+- Pull model is **ineffective**: involves two steps:
+  - Subject notifies the Observer
+  - Observer pulls the required data from the Subject
+
+## The push model
+- Changes are pushed by the Subject to the Observer
+- Subject can send detailed information to the Observer (even though it may not be needed) -> can result in sluggish response times when a large amount of data in sent by the Subject but is never actually used by the Observer
+
+## Loose coupling and the observer pattern
+- Coupling refers to the degree of knowledge that one object has about the other object that it interacts with
+
+> Loosely-coupled designs allow us to build flexbile object-oriented systems that can handle changes because they reduce the dependency between multiple objects
+
+- Reduces the risk that a change made within one element might create an unanticipated impact on the other elements
+- Simplifies testing, maintenance, and troubleshooting problems
+- System can be easily broken down into definable elements
+
+# Ch7. The command pattern - encapsulating invocation
