@@ -290,3 +290,36 @@ Python:
 - System can be easily broken down into definable elements
 
 # Ch7. The command pattern - encapsulating invocation
+> Behavioral design pattern in which an object is used to encapsulate all the information needed to perform an action or trigger an event at a later time
+
+## Understanding the command design pattern
+- A `Command` object knows about the `Receiver` objects and invokes a method of the `Receiver` object
+- Values for parameters of the receiver method are stored in the `Command` object
+- The invoker knows how to execute a command
+- The client creates a `Command` object and sets its receiver
+
+### Intentions
+- Encapsulating a request as an object
+- Allowing the parametrization of clients with different requests
+- Allowing to save the requests in a queue
+- Providing an object-oriented callback
+
+### Scenarios of use
+- Parametrizing objects depending on the action to be performed
+- Adding actions to a queue and executing requests at different points
+- Creating a structure for high-level operations that are based on smaller operations
+- E.g.:
+  - Redo or rollback operations
+  - Asynchronous task execution
+
+## Advantages
+- Decouples the classes that invoke the operation from the object that knows how to execute the operation
+- Provide a queue system
+- Extensions to add new commands are easy
+- A rollback system with the command pattern can be defined
+
+## Disadvantages
+- High number of classes and objects working together to achieve a goal
+- Every individual command is a `ConcreteCommand` class that increases the volume of classes for implementation and maintenance
+
+# Ch8. The templated method pattern - encapsulating algorithm
