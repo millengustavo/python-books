@@ -323,3 +323,42 @@ Python:
 - Every individual command is a `ConcreteCommand` class that increases the volume of classes for implementation and maintenance
 
 # Ch8. The templated method pattern - encapsulating algorithm
+
+## Use cases
+- When multiple algorithms or classes implements similar or identical logic
+- The implementation of algorithms in subclasses helps reduce code duplication
+- Multiple algorithms can be defined by letting the subclasses implement the behavior through overriding
+
+## Intentions
+- Define a skeleton of an algorithm with primitive operations
+- Redefine certain operations of the subclass without changing the algorithm's structure
+- Achieve code reuse and avoid duplicate efforts
+- Leverage common interfaces or implementations
+
+## Terms
+- `AbstractClass`: Declares an interface to define the steps of the algorithm
+- `ConcreteClass`: Defines subclass-specific step definitions
+- `template_method()`: Defines the algorithm by calling the step methods
+
+## Hooks
+- Hook: a method that is declared in the abstract class
+- Give a subclass the ability to *hook into* the algorithm whenever needed
+- Not imperative for the subclass to use hooks
+
+> We use abstract methods when the subclass must provide the implementation, and hook is used when it is optional for the subclass to implement it
+
+## The Hollywood principle
+- Design principle summarized by **Don't call us, we'll call you**
+- Relates to the template method -> it's the high-level abstract class that arranges the steps to define the algorithm
+
+## Advantages
+- No code duplication
+- Uses inheritance and not composition -> only a few methods need to be overriden
+- Flexibility lets subclasses decide how implement steps in an algorithm
+
+## Disadvantages
+- Confusing debugging and undestanding the sequence of flow
+- Documentation and strict error handling has to be done by the programmer
+- Maintenance can be a problem -> changes to any level can disturb the implementation
+
+# Ch9. Model-View-Controller - Compound patterns
