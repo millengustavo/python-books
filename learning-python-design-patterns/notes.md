@@ -362,3 +362,35 @@ Python:
 - Maintenance can be a problem -> changes to any level can disturb the implementation
 
 # Ch9. Model-View-Controller - Compound patterns
+> "A compound pattern combines two or more patterns into a solution that solves a recurring or general problem" - GoF
+
+A compound pattern is not a set of patterns working together; it is a general solution to a problem
+
+## The Model-View-Controller pattern
+- Model represents the data and business logic: how information is stored and queried
+- View is nothing but the representation: how it is presented
+- Controller is the one that directs the model and view to behave in a certain way: it's the glue between the two
+- The view and controller are dependent on the model, but not the other way around
+
+### Terms
+- **Model - knowledge of the application**: store and manipulate data (create, modify and delete). Has state and methods to change states, but is not aware of how the data would be seen by the client
+- **View - the appearance**: build user interfaces and data displays (it should not contain any logic of its own and just display the data it receives)
+- **Controller - the glue**: connects the model and view (it has methods that are used to route requests)
+- **User**: requests for certain results based on certain actions
+
+### Intention
+- Keep the data and presentation of the data separate
+- Easy maintenance of the class and implementation
+- Flexibility to change the way in which data is stored and displayed -> both are independent and hence have the flexibility to change
+
+## The MVC pattern in the real world
+- Django or Rails
+- **MTV (Model, Template, View)**: model is the database, templates are the views, and controllers are the views/routes
+
+## Benefits of the MVC pattern
+- Easy maintenance
+- Loose coupling
+- Decrease complexity
+- Development efforts can run independently
+
+# Ch10. The state design pattern
