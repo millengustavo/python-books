@@ -394,3 +394,23 @@ A compound pattern is not a set of patterns working together; it is a general so
 - Development efforts can run independently
 
 # Ch10. The state design pattern
+- Behavioral design pattern
+- Sometimes referred to as an **objects for states** pattern
+- Used to develop Finite State Machines and helps to accommodate State Transaction Actions
+
+## Understanding the state design pattern
+- `State`: an interface that encapsulates the object's behavior. This behavior is associated with the state of the object
+- `ConcreteState`: a subclass that implements the `State` interface -> implements the actual behavior associated with the object's particular state
+- `Context`: the interface of interest to clients. Also maintains an instance of the `ConcreteState` subclass that internally defines the implementation of the object's particular state
+
+## Advantages
+- Removes the dependency on the if/else or switch/else conditional logic
+- Benefits of implementing polymorphic behavior, also easier to add states to support additional behavior
+- Improves cohesion: state-specific behaviors are aggregated into the `ConcreteState` classes, which are placed in one location in the code
+- Improves the flexibility to extend the behavior of the application and overall improves code maintenance
+
+## Disadvantages
+- Class explosion: every state needs to be defined with the help of `ConcreteState` -> might end up writing many more classes with a small functionality
+- `Context` class needs to be updated to deal with each behavior
+
+# Ch11. AntiPatterns
