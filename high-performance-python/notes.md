@@ -671,5 +671,3 @@ If we keep the `k` smallest unique hash values we have seen, we can **approximat
 - Set to have error rates below 0.5%
 
 # Ch12. Lessons from the field
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>

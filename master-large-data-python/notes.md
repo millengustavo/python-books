@@ -623,4 +623,3 @@ Ways to get access to a compute cluster that support both Hadoop and Spark:
 - Hive: compile SQL code to Hadoop MapReduce jobs
 - Pig: compile *Pig-latin* (SQL-like) commands to run Hadoop MapReduce jobs
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
