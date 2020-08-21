@@ -414,3 +414,62 @@ A compound pattern is not a set of patterns working together; it is a general so
 - `Context` class needs to be updated to deal with each behavior
 
 # Ch11. AntiPatterns
+Four aspects of a bad design:
+- **Immobile**: hard to reuse
+- **Rigid**: any small change may in turn result in moving too many parts of the software
+- **Fragile**: any change results in breaking the existing system fairly easy
+- **Viscose**: changes are done in the code or envinronment itself to avoid difficult architectural level changes
+
+> An AntiPattern is an outcome of a solution to recurring problems so that the outcome is innefective and becomes counterproductive
+
+AntiPatterns may be the result of:
+- A developer not knowing the software development practices
+- A developer not applying design patterns in the correct context
+
+## Software development AntiPatterns
+Software deviates from the original code structure due to:
+- The tought process of the developer evolves with development
+- Use cases change based on customer feedback
+- Data structures designed initially may undergo change with functionality or scalability considerations
+
+> Refactoring is one of the critical parts of the software development journey, which provides developers an opportunity to relook the data structures and think about scalability and ever-evolving customer's needs
+
+### Spaghetti code
+- Minimum reuse of structures is possible
+- Maintenance efforts are too high
+- Extension and flexibility to change is reduced
+
+### Golden Hammer
+- One solution is obsessively applied to all software projects
+- The product is describe, not by the features, but the technology used in development
+- In the company corridors, you hear developers talking, "That could have been better than using this"
+- Requirements are not completed and not in sync with user expectations
+
+### Lava Flow
+- Low code coverage for developed tests
+- Commented code without reasons
+- Obsolete interfaces, or developers try to work around existing code
+
+### Copy-and-paste or cut-and-paste programming
+- Similar type of issues across software application
+- Higher maintenance costs and increased bug life cycle
+- Less modular code base with the same code running into a number of lines
+- Inheriting issues that existed in the first place
+
+## Software architecture AntiPatterns
+> Software architecture looks at modeling the software that is well understood by the development and test teams, product managers, and other stakeholders
+
+### Reinventing the wheel
+- Too many solutions to solve one standard problem, with many of them not being well thought out
+- More time and resource utilization for the engineering team leading overbudgeting and more time to market
+- A closed system architecture (useful for only one product), duplication of efforts, and poor risk management
+
+### Vendor lock-in
+- Release cycles and product maintenance cycles of a company's product releases are directly dependent on the vendor's release time frame
+- The product is developed around the technology rather than on the customer's requirements
+- The product's time to market is unreliable and doesn't meet customer's expectations
+
+### Design by committee
+- Conflicting viewpoints between developers and architects even after the design is finalized
+- Overly complex design that is very difficult to document
+- Any change in the specification or design undergoes review by many, resulting in implementation delays
