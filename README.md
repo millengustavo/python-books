@@ -8,6 +8,8 @@
 
 - Learning Python Design Patterns - Chetan Giridhar [[open notes]](./learning-python-design-patterns/notes.md)
 
+- Architecture Patterns with Python: Enabling Test-Driven Development, Domain-Driven Design, and Event-Driven Microservices - Bob Gregory, Harry Percival [[open notes]](./architecture-patterns-python/notes.md)
+
 - Fluent Python - Luciano Ramalho
 
 ![compiler_options](high-performance-python/compiler_options.png)
