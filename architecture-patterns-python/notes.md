@@ -31,3 +31,32 @@ Formal definition:
 > *Depends on* doesn't mean *imports* or *calls*, necessarily, but rather a more general idea that one module *knows about* or *needs* another module
 
 # Part I. Building an architecture to support domain modeling
+
+> "Behavior should come first and drive our storage requirements."
+
+# Ch1. Domain Modeling
+## What is a domain model?
+- Domain model = business logic layer
+- Domain: "The problem you're trying to solve"
+- Model: a map of a process or phenomenon that captures a useful property
+
+> **Domain-driven design (DDD)**: the most important thing about software is that it provides a useful model of a problem. If we get that model right, our software delivers value and makes new things possible
+
+- Make sure to express rules in the business jargon (*ubiquitous language* in DDD terminology)
+- "We could show this code to our nontechnical coworkers, and they would agree that this correctly describes the behavior of the system"
+- Avoiding a ball of mud: stick rigidly to principles of encapsulation and careful layering
+- `from typing import NewType`: wrap primitive types
+
+### Dataclasses are great for value objects
+- Business concept that has data but no identity: choose to represent it using the *Value Object* pattern
+- *Value Object*: any domain object that is uniquely identified by the data it holds (we usually make them immutable) -> `from dataclasses import dataclass`; `@dataclass(frozen=True)` decorator above class definition
+- Dataclasses (or namedtuples) give us *value equality*
+
+### Value objects and entities
+- Value object: any object that is identified only by its data and doesn't have a long-lived identity
+- Entity: domain object that has long-lived identity
+- Entities, unlike values, have *identity equality*: we can change their values, and they are still recognizably the same thing -> make this explicit in code by implementing `__eq__` (equality operator) on entities
+- `__hash__` is the magic method Python uses to control the behavior of objects when you add them to sets or use them as dict keys
+- **Python's magic methods let us use our models with idiomatic Python**
+
+# Ch2. Repository Pattern
