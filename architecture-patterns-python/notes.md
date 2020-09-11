@@ -60,3 +60,24 @@ Formal definition:
 - **Python's magic methods let us use our models with idiomatic Python**
 
 # Ch2. Repository Pattern
+- A simplifying abstraction over data storage -> allow us to decouple our model layer from the data layer
+- **Layered architecture**: aim to keep the layers separate, and to have each layer depend only on the one below it
+- **Onion architecture**: think of our model as being on the "inside" and dependencies flowing inward to it
+- **Dependency inversion principle**: high-level modules (the domain) should not depend on low-level ones (the infrastructure)
+
+## Object-relational mappers (ORMs)
+- Bridge the conceptual gap between the world of objects and domain modeling and the world of databases and relational algebra
+- Gives us *persistence ignorance*: our domain model doesn't need to know anything about how data is loaded or persisted -> keep our domain clean of direct dependencies on particular database technologies
+
+## Introducing the repository pattern
+- The repository pattern is an abstraction over persistent storage
+- It hides the boring details of data access by pretending that all of our data is in memory
+
+> We often just rely on Python's duck typing to enable abstractions. To a Pythonista, a repository is *any* object that has `add(thing)` and `get(id)` methods
+
+## What is the trade-off?
+- Write a few lines of code in our repository class each time we add a new domain object that we want to retrieve
+- In return we get a simple abstraction over our storage layer, which we control
+- Easy to fake out for unit tests
+
+# Ch3. A brief interlude: on coupling and abstractions
