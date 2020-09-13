@@ -81,3 +81,15 @@ Formal definition:
 - Easy to fake out for unit tests
 
 # Ch3. A brief interlude: on coupling and abstractions
+- **Coupled components**: when we're unable to change component A for fear of breaking component B
+- Locally coupling = good = high *cohesion* between the coupled elements
+- Globally coupling = nuisance = increases the risk/cost of changing our code
+
+
+![abstraction](abstraction.jpeg)
+- **Abstraction**: protect us from change by hiding away the complex details of whatever system B does
+- We can change the arrows on the right without changing the ones on the left
+
+> Try to write a simple implementation and then refactor toward better design
+
+# Ch4. Our first use case: flask API and service layer
