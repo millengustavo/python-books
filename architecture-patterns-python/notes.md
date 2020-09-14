@@ -93,3 +93,22 @@ Formal definition:
 > Try to write a simple implementation and then refactor toward better design
 
 # Ch4. Our first use case: flask API and service layer
+
+## A typical service function
+1. Fetch some objects from the repository
+2. Make some checks or assertions about the request against the current state of the world
+3. Call a domain service
+4. If all is well, save/update any state changed
+
+- Flask app responsibilities (standard web stuff):
+  - Per-request session management
+  - Parsing information out of POST parameters
+  - Response status codes
+  - JSON
+- All the orchestration logic is in the use case/service layer and the domain logic stays in the domain
+
+## Service Layer vs Domain Service
+- **Service Layer (application service)**: handle requests from the outside world and orchestrate an operation
+- **Domain Service**: logic that belongs in the domain model, but doesn't sit naturally inside a stateful entity of value object
+
+# Ch5. TDD in high gear and low gear
