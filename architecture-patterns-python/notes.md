@@ -112,3 +112,20 @@ Formal definition:
 - **Domain Service**: logic that belongs in the domain model, but doesn't sit naturally inside a stateful entity of value object
 
 # Ch5. TDD in high gear and low gear
+- The service layer helps us clearly define our use cases and the workflow for each
+- Tests: help us change our system fearlessly
+- Don't write too many tests against the domain model: when you need to change the codebase you may need to update several unit tests
+- Testing against the service layer: tests don't nteract directly with "private" methods/attributes on our model objects = easier to refactor them
+
+> "Every line of code that we put in a test is like a **blob of glue**, holding the system in a particular shape. The more low-level tests we have, the harder it will be to change things."
+
+- **"Listen to the code"**: when writing tests and find that the code is hard to use or some code smell = trigger to refactor and reconsider the design
+- To improve the design of the code we must delete "sketch" tests that are to tightly coupled to a particular implementation
+
+## High and low gear
+- When starting a new project or gnarly problem: write tests against the domain model = better feedback
+- When adding a new feature or fixing a bug (don't need to make extensive changes to the domain model): write tests against the services = lower coupling and higher coverage
+- **Shifting gears metaphor**
+- Mitigation: keep all domain dependencies in fixture functions
+
+# Ch6. Unit of Work pattern
