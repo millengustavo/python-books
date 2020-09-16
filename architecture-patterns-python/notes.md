@@ -129,3 +129,11 @@ Formal definition:
 - Mitigation: keep all domain dependencies in fixture functions
 
 # Ch6. Unit of Work pattern
+- Abstraction over the idea of *atomic operations*
+- Allow us to fully decouple our service layer from the data layer
+- We can implement it using Python's **context manager**
+- Context manager: `__enter__` and `__exit__` are the two magic methods that execute when we enter the `with` block and when we exit it, respectively = setup and teardown phases
+
+> **Don't mock what you don't own**: rule of thumb that forces us to build simple abstractions over messy subsystems
+
+# Ch7. Aggregates and consistency boundaries
