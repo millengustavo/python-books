@@ -137,3 +137,38 @@ Formal definition:
 > **Don't mock what you don't own**: rule of thumb that forces us to build simple abstractions over messy subsystems
 
 # Ch7. Aggregates and consistency boundaries
+## Why not just run everything in a spreadsheet?
+**"CSV over SMTP"** architecture:
+- Low initial complexity
+- Do not to scale very well
+- Difficult to apply logic and maintain consistency
+
+## Invariants, constraints and consistency
+- **Constraint**: rule that restricts the possible states our model can get into
+- **Invariant**: defined a little more precisely as a condition that is always true
+- **Locks**: prevents two operations from happening simultaneously on the same row or same table
+
+## What is an Aggregate?
+- A domain object that contains other domain objects and lets us treat the whole collection as a single unit
+- The only way to modify the objects inside the aggregate is to load the whole thing, and to call methods on the aggregate itself
+
+> "An Aggregate is a cluster of associated objects that we treat as a unit for the purpose of data changes" - Eric Evans, DDD blue book
+
+## Choosing an Aggregate
+- Draw a boundary around a small number of objects (smaller the better for performance)
+- Have to be consistent with one another
+- Give a good name
+
+> **Bounded contexts**: reaction against attempts to capture entire businesses into a single model
+
+## One Aggregate = One Repository
+- **Repositories should only return aggregates**
+- Aggregates are the only entities that are publicly accessible to the outside world
+
+## Optimistic concurrency
+- Version numbers are one way to implement it
+- Another implementation: setting the Postgres transaction isolation level to SERIALIZABLE (severe performance cost)
+- **Optimistic** = default assumption is that everything will be fine when two users want to make changes to the database -> you need to explicitly handle the possibility of failures in the case of a clash (retry the failure operation from the beginning)
+- **Pessimistic** concurrency = assumption that two users are going to cause conflicts -> prevent conflict in all cases -> lock everything just to be safe -> don't need to think about handling failures because the databse will prevent them for you (you do need to think about deadlocks)
+
+# Part II. Event-Driven Architecture
