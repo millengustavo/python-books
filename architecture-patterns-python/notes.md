@@ -7,6 +7,36 @@ Authors: Bob Gregory, Harry Percival
 
 ![arch_patterns_cover](arch_patterns_cover.jpg)
 
+- [Architecture Patterns with Python: Enabling Test-Driven Development, Domain-Driven Design, and Event-Driven Microservices](#architecture-patterns-with-python-enabling-test-driven-development-domain-driven-design-and-event-driven-microservices)
+- [Introduction](#introduction)
+  - [Encapsulation and Abstractions](#encapsulation-and-abstractions)
+  - [Layering](#layering)
+  - [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
+- [Part I. Building an architecture to support domain modeling](#part-i-building-an-architecture-to-support-domain-modeling)
+- [Ch1. Domain Modeling](#ch1-domain-modeling)
+  - [What is a domain model?](#what-is-a-domain-model)
+    - [Dataclasses are great for value objects](#dataclasses-are-great-for-value-objects)
+    - [Value objects and entities](#value-objects-and-entities)
+- [Ch2. Repository Pattern](#ch2-repository-pattern)
+  - [Object-relational mappers (ORMs)](#object-relational-mappers-orms)
+  - [Introducing the repository pattern](#introducing-the-repository-pattern)
+  - [What is the trade-off?](#what-is-the-trade-off)
+- [Ch3. A brief interlude: on coupling and abstractions](#ch3-a-brief-interlude-on-coupling-and-abstractions)
+- [Ch4. Our first use case: flask API and service layer](#ch4-our-first-use-case-flask-api-and-service-layer)
+  - [A typical service function](#a-typical-service-function)
+  - [Service Layer vs Domain Service](#service-layer-vs-domain-service)
+- [Ch5. TDD in high gear and low gear](#ch5-tdd-in-high-gear-and-low-gear)
+  - [High and low gear](#high-and-low-gear)
+- [Ch6. Unit of Work pattern](#ch6-unit-of-work-pattern)
+- [Ch7. Aggregates and consistency boundaries](#ch7-aggregates-and-consistency-boundaries)
+  - [Why not just run everything in a spreadsheet?](#why-not-just-run-everything-in-a-spreadsheet)
+  - [Invariants, constraints and consistency](#invariants-constraints-and-consistency)
+  - [What is an Aggregate?](#what-is-an-aggregate)
+  - [Choosing an Aggregate](#choosing-an-aggregate)
+  - [One Aggregate = One Repository](#one-aggregate--one-repository)
+  - [Optimistic concurrency](#optimistic-concurrency)
+- [Part II. Event-Driven Architecture](#part-ii-event-driven-architecture)
+
 # Introduction
 
 > A big ball of mud is the natural state of software in the same way that wilderness is the natural state of your garden. It takes energy and direction to prevent the colapse
