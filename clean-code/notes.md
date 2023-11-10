@@ -84,8 +84,8 @@ Author: Robert C. Martin
 # Ch1. Clean Code
 > "Most managers want good code, even when they are obsessing about the schedule (...) It's *your* job to defend the code with equal passion"
 
-- Clean code is *focused*: each function, each class, each module exposes a single-minded attitude that remains entirely undistracted, and upolluted, by the surrounding details
-- Code, without tests, is not clean. No matter how elegant it is, no matter how readable and accessible, if it hath not tests, it be unclean
+- Clean code is *focused*: each function, each class, each module exposes a single-minded attitude that remains entirely undistracted, and unpolluted, by the surrounding details
+- Code, without tests, is not clean. No matter how elegant it is, no matter how readable and accessible, if it has not tests, it be unclean
 - You will read it, and it will be pretty much what you expected. It will be obvious, simple, and compelling
 
 ## Reading vs. Writing
